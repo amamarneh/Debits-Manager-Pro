@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2E7D32</color>
+    <color name="colorPrimaryDark">#1B5E20</color>
+    <color name="colorAccent">#388E3C</color>
+
+    <color name="green_price">#68d61f</color>
+    <color name="gary">#dedede</color>
+    <color name="gary_dark">#464646</color>
+    <color name="gary_light">#f2f2f2</color>
+    <color name="blue">#65c2d7</color>
+    <color name="white">#ffffff</color>
+    <color name="green">#37bf1b</color>
+    <color name="orange">#e3981b</color>
+    <color name="black">#000000</color>
+
+    <color name="debitColor">#ff5252</color>
+    <color name="paymentColor">#5daf48</color>
+</resources>

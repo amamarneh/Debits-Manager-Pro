@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/coordinatorlayout"
+    android:padding="5dp">
+
+    <RadioGroup android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+                android:layout_height="wrap_content">
+
+        <RadioButton android:layout_width="wrap_content"
+            android:layout_weight="1"
+                     android:id="@+id/meRadioBtn"
+                     android:checked="true"
+                     android:text="Debit"
+                     android:layout_height="wrap_content"/>
+
+        <RadioButton android:layout_width="wrap_content"
+            android:layout_weight="1"
+                     android:id="@+id/onMeRadioBtn"
+                     android:text="Payment"
+                     android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+    <LinearLayout
+        android:gravity="center"
+        android:padding="3dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/button_layout2"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:id="@+id/btnChoosePerson"
+            android:text="choose"
+            android:layout_height="40dp"/>
+
+        <AutoCompleteTextView
+            android:background="@drawable/border_flat"
+            android:layout_marginStart="3dp"
+            android:layout_width="match_parent"
+
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:id="@+id/txtName"
+            android:hint="@string/person_name"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+<LinearLayout
+    android:gravity="center"
+    android:padding="3dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/border2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <Button
+        android:textSize="12sp"
+        android:background="@drawable/button_layout2"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:id="@+id/txtCur"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+
+        android:text="NIS"
+        />
+    <EditText
+
+        android:id="@+id/txtAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_flat"
+        android:hint="@string/amount"
+        android:inputType="numberDecimal"
+        android:padding="10dp"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center" />
+
+</LinearLayout>
+
+
+
+
+
+    <Button android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_layout2"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+              android:id="@+id/txtTransDate"
+        android:text="Transaction Date\n15/11/2017"
+              android:layout_height="wrap_content"/>
+
+    <EditText android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+              android:background="@drawable/border2"
+              android:padding="10dp"
+              android:id="@+id/txtNotes"
+              android:hint="@string/notes"
+              android:layout_height="wrap_content"/>
+
+
+    <Button android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_layout2"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:id="@+id/btnReminderDate"
+            android:text="Reminder Date\n15/11/2017"
+            android:layout_height="wrap_content"/>
+
+    <Button android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_layout1"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+            android:id="@+id/btnSave"
+            android:text="@string/save"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

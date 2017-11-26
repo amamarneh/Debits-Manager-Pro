@@ -1,0 +1,172 @@
+<resources>
+    <string name="app_name">Debits Manager Pro</string>
+    <string name="persons">Persons</string>
+    <string name="personsCat">Persons Categories</string>
+    <string name="debits">Debits</string>
+    <string name="balances">Balances</string>
+    <string name="recieptsDates">Reciepts Dates</string>
+    <string name="curs">Currencies</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search</string>
+    <string name="delete">Delete</string>
+    <string name="person_detail">Person Details</string>
+    <string name="balance">Balance</string>
+    <string name="defualt_cat_name">defualt cat</string>
+    <string name="save">Save</string>
+    <string name="not_valid_name">The name field is not valid !</string>
+    <string name="saved_successfully">Saved Successfully</string>
+    <string name="cat">Category</string>
+    <string name="person_name">Person Name</string>
+    <string name="amount">Amount</string>
+    <string name="onMe">onMe</string>
+    <string name="notes">Notes</string>
+    <string name="defualt_cur_name">NIS</string>
+    <string name="amount_field_not_valid">Amount field not valid</string>
+    <string name="choosePerson">Choose Person</string>
+    <string name="the_equ_must_be_greater_than_zero">The equevelent must be greater than zero
+    </string>
+    <string name="showAll">Show All</string>
+    <string name="loading">Loading</string>
+    <string name="reminders">Reminders</string>
+    <string name="add_person">Add Person</string>
+    <string name="add_personCat">Add Person Cat</string>
+    <string name="add_debit">Add Debit</string>
+    <string name="add_payment">Add Payment</string>
+    <string name="add_cur">Add Cur</string>
+
+    <string name="update_person">Update Person</string>
+    <string name="update_personCat">Update Person Cat</string>
+    <string name="update_debit">Update Debit</string>
+    <string name="update_payment">Update Payment</string>
+    <string name="update_cur">Update Cur</string>
+
+    <string name="debits_and_payments">Debits And Payments</string>
+    <string name="new_person_added_successfully">New Person Added Succedssfully</string>
+    <string name="added_successfully">Added Successfully</string>
+    <string name="updated_successfully">Updated Successfully</string>
+    <string name="debit">Debit</string>
+    <string name="payment">Payment</string>
+    <string name="transactionDate">Transaction Date</string>
+    <string name="reminderDate">Reminde Date</string>
+    <string name="addReminder">Add Reminder</string>
+    <string name="updateRemider">Update Reminder</string>
+    <string name="theReminderDateWasGone">The Reminder Date was gone!</string>
+    <string name="cant_delete_this_cur">Can\'t delete this currency</string>
+    <string name="cant_delete_this_cat">Can\'t delete this Category</string>
+    <string name="cant_delete_this_person">Can\'t delete this person</string>
+    <string name="cant_delete_this_reminder">Can\'t delete this reminder</string>
+    <string name="cant_delete_this_transaction">Can\'t delete this transaction</string>
+    <string name="not_found">Not Found</string>
+    <string name="payments">Payments</string>
+    <string name="curEqu">Cur equ</string>
+    <string name="title_activity_combine_persons">CombinePersonsActivity</string>
+    <string name="wait">Wait</string>
+    <string name="nis">NIS</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>5 hours</item>
+        <item>24 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>300</item>
+        <item>1440</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pref_data_reset">Data Reset</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="auth_failed">Auth faild</string>
+    <string name="reset_data">Reset Data</string>
+    <string name="number_of_persons">Number of persons:</string>
+    <string name="number_of_cats">Number of categories:</string>
+    <string name="total">Total</string>
+    <string name="number_of_cur">Number of Currencies:</string>
+    <string name="sum">Sum</string>
+    <string name="count">Count</string>
+    <string name="clear_all">Clear All Transactions</string>
+    <string name="person">persons</string>
+    <string name="cats">Categories</string>
+    <string name="Curs">Currencies</string>
+    <string name="currency">Currency</string>
+    <string name="transaction_date">Transaction Date</string>
+    <string name="settings">Settings</string>
+    <string name="calculator">Calculator</string>
+</resources>

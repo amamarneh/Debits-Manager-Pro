@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="amarnehsoft.com.debits">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activities.MainActivity">
+
+        </activity>
+        <activity
+            android:name=".activities.listActivities.PersonsActivity"
+            android:label="@string/persons"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".activities.listActivities.PersonsCatListActivity"
+            android:label="@string/personsCat"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".activities.listActivities.CurListActivity"
+            android:label="@string/curs"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".activities.listActivities.TransactionListActivity"
+            android:label="@string/debits"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".activities.listActivities.BalanceListActivity"
+            android:label="@string/balances"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".activities.listActivities.ReminderListActivity"
+            android:label="@string/reminders"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".activities.itemDetailActivities.PersonDetailActivity"
+            android:label="@string/person_detail"
+            android:parentActivityName=".activities.listActivities.PersonsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="amarnehsoft.com.debits.activities.itemDetailActivities.PersonDetailActivity" />
+        </activity>
+        <activity
+            android:name=".activities.itemDetailActivities.PersonCatDetailActivity"
+            android:label="@string/person_detail"
+            android:parentActivityName=".activities.listActivities.PersonsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="amarnehsoft.com.debits.activities.itemDetailActivities.PersonDetailActivity" />
+        </activity>
+        <activity
+            android:name=".activities.itemDetailActivities.TransactionDetailActivity"
+            android:label="@string/person_detail"
+            android:parentActivityName=".activities.listActivities.PersonsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="amarnehsoft.com.debits.activities.itemDetailActivities.PersonDetailActivity" />
+        </activity>
+        <activity
+            android:name=".activities.itemDetailActivities.ReminderDetailActivity"
+            android:label="@string/person_detail"
+            android:parentActivityName=".activities.listActivities.PersonsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="amarnehsoft.com.debits.activities.itemDetailActivities.PersonDetailActivity" />
+        </activity>
+        <activity
+            android:name=".activities.itemDetailActivities.CurDetailActivity"
+            android:label="@string/person_detail"
+            android:parentActivityName=".activities.listActivities.PersonsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="amarnehsoft.com.debits.activities.itemDetailActivities.PersonDetailActivity" />
+        </activity>
+        <activity
+            android:name=".activities.entriesActivities.AddEditPeronActivity"
+            android:label="@string/add_person"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name=".activities.entriesActivities.AddEditPeronCatActivity"
+            android:label="@string/add_personCat"
+            android:parentActivityName=".activities.listActivities.PersonsActivity"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name=".activities.entriesActivities.AddEditTransactionActivity"
+            android:label="@string/add_debit"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name=".activities.entriesActivities.AddEditCurActivity"
+            android:label="@string/add_cur"
+            android:parentActivityName=".activities.listActivities.CurListActivity"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name=".activities.entriesActivities.AddEditReminderActivity"
+            android:label="@string/addReminder"
+            android:parentActivityName=".activities.listActivities.ReminderListActivity"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name=".activities.CombinePersonsActivity"
+            android:label="@string/title_activity_combine_persons"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name=".broadcastReceiver.NotificationPublisher" />
+
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.MainActivity" />
+
+        <receiver android:name=".Services.AlarmReceiver"></receiver>
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/title_activity_login">
+
+        </activity>
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".Services.FloatingViewService"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <receiver android:name=".providers.SimpleWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/simple_widget_info" />
+        </receiver>
+
+    </application>
+
+</manifest>

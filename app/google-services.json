@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "162925874680",
+    "firebase_url": "https://debits-12ada.firebaseio.com",
+    "project_id": "debits-12ada",
+    "storage_bucket": "debits-12ada.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162925874680:android:71b59156d055bf48",
+        "android_client_info": {
+          "package_name": "amarnehsoft.com.debits"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162925874680-5r42rev8k4f53an6pru6jebanfnemla9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "amarnehsoft.com.debits",
+            "certificate_hash": "6c4742f785a9893b3f608bb0e1d6986a0691d73d"
+          }
+        },
+        {
+          "client_id": "162925874680-huu27lmchp0of4ml6qd7ajf1v627mqhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJt0gFBfKslnk5TIZ4Mg2K1AQX1Cwu2cM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162925874680-huu27lmchp0of4ml6qd7ajf1v627mqhn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
