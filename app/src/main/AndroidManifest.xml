@@ -3,6 +3,7 @@
     package="amarnehsoft.com.debits">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
 

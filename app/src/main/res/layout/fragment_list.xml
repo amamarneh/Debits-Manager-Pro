@@ -18,26 +18,26 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/orderbyTextView"
-                android:text="Order By"
+                android:text="@string/orderBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:id="@+id/orderbydateBtn"
-                android:text="date"
+                android:text="@string/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:id="@+id/orderbynameBtn"
-                android:text="name"
+                android:text="@string/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:id="@+id/orderbypriceBtn"
-                android:text="price"
+                android:text="@string/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <Button
@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="From" />
+                    android:text="@string/from" />
 
                 <View
                     android:layout_width="1dp"
@@ -82,7 +82,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Beginning" />
+                    android:text="@string/begining" />
 
                 <Switch
                     android:id="@+id/fromdateSwitch"
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="  To  "
+                    android:text="@string/to"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <View
@@ -118,7 +118,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Now" />
+                    android:text="@string/now" />
                 <Switch
                     android:id="@+id/todateSwitch"
                     android:layout_width="wrap_content"

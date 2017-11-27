@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border2"
-            android:hint="person name"
+            android:hint="@string/personName"
             android:padding="10dp"
             android:singleLine="true" />
     </LinearLayout>
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border2"
-            android:hint="phone"
+            android:hint="@string/phone"
             android:inputType="phone"
             android:padding="10dp"
             android:singleLine="true" />
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/border2"
-            android:hint="email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="10dp" />
     </LinearLayout>
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/border2"
-            android:hint="Address"
+            android:hint="@string/address"
             android:padding="10dp"
             android:singleLine="true" />
     </LinearLayout>
@@ -100,7 +100,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/button_layout2"
-        android:text="cat"
+        android:text="@string/cat"
         android:textColor="@color/white"
         android:textStyle="bold" />
 

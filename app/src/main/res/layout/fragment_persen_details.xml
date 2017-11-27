@@ -245,7 +245,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
-                android:text="Payments"
+                android:text="@string/payments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <View
@@ -278,7 +278,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Debits"
+                android:text="@string/debits"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -318,25 +318,5 @@
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
-    <!--<LinearLayout-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:gravity="center_horizontal"-->
-        <!--android:foreground="?android:attr/selectableItemBackground"-->
-        <!--android:background="@color/blue"-->
-        <!--android:id="@+id/clearallBtn"-->
-        <!--android:clickable="true"-->
-        <!--android:padding="10dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<TextView-->
-            <!--android:textSize="20sp"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:text="Clear ALL"-->
-            <!--android:textAlignment="center"-->
-            <!--android:layout_height="wrap_content" />-->
-    <!--</LinearLayout>-->
-
 
 </LinearLayout>
