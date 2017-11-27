@@ -80,7 +80,7 @@ public class TransactionListActivity extends ListActivity {
             if (resultCode== RESULT_OK){
                 Transaction bean = data.getParcelableExtra("data");
                 mFragment.setupRecyclerView();
-                ShowSnackbar("[" + " trans " + "] " +  getString(R.string.added_successfully));
+                ShowSnackbar(getString(R.string.newTrans) + " " +  getString(R.string.added_successfully));
             }
         }
     }

@@ -14,7 +14,7 @@ import amarnehsoft.com.debits.R;
  */
 
 public abstract class AddEditActivity extends AppCompatActivity {
-    
+
     public static final String ARG_CODE = "code";
     public static final int MODE_ADD=0;
     public static final int MODE_EDIT=1;

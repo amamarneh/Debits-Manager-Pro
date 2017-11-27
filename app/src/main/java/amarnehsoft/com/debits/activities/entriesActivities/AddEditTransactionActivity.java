@@ -299,11 +299,10 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
         Person person = PersonsDB.getInstance(this).getBeanByName(txtName.getText().toString().trim());
         if(person == null){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Unknown Person")
-                    .setMessage("This person is not exist, Add this Person?!")
+            builder.setTitle(getString(R.string.unknounPerson))
+                    .setMessage(getString(R.string.thisPersonDoesntExistAddIt))
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-
                             Person person = new Person();
                             person.setKey(UUID.randomUUID().toString());
                             person.setName(txtName.getText().toString().trim());
@@ -312,14 +311,9 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
                             person.setCatCode(Defualts.DEFUALT);
                             person.setIsDeleted(0);
 
-
                             PersonsDB.getInstance(AddEditTransactionActivity.this).saveBean(person);
 
                             save(person);
-
-
-
-
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

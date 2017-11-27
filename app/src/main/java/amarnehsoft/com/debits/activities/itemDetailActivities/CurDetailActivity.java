@@ -67,7 +67,7 @@ public class CurDetailActivity extends ItemDetailActivity<Cur,CurDB> {
     @Override
     protected void onDeleteMenuItemClicked(String key) {
         if(TransactionsDB.getInstance(this).getNoOfTransactionsForCur(key) > 0){
-            Alerts.MyAlert(this,"Can't Delete","this Currency has being used, it can't be deleted!").show();
+            Alerts.MyAlert(this,getString(R.string.cantDelete),getString(R.string.thisCurHasBeenUsedItCantBeDeleted)).show();
         }else {
             if (CurDB.getInstance(this).deleteBean(key)) {
                 setResult(RESULT_OK);

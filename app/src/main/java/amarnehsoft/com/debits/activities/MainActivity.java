@@ -75,18 +75,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Dummy.setDummyData(this);
-
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         getIntent().putExtra(ARG_NUM_OF_COLS,2);
         setupRecyclerView();
-
-        boolean newLog = getIntent().getBooleanExtra("newLog",false);
-
-
-            Log.d("Amarneh","onCreate ");
-
-
     }
 
 
@@ -105,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         double debitsSum = TransactionsDB.getInstance(this).getSumOfTransaction(0);
         double paymentsSum = TransactionsDB.getInstance(this).getSumOfTransaction(1);
         double balanceSum = debitsSum - paymentsSum;
-        String balanceType= balanceSum>=0?"Debits":"Payments";
+        String balanceType= balanceSum>=0?getString(R.string.debits):getString(R.string.payments);
         Cur cur = CurDB.getInstance(this).getDefualtBean();
         personsItem.setSummery( personsCount + " " + getString(R.string.person));
         personsCatItem.setSummery( catCount+ " " + getString(R.string.cats));

@@ -79,27 +79,25 @@ public class PersonDetailActivity extends ItemDetailActivity<Person,PersonsDB> {
     protected void onDeleteMenuItemClicked(String key) {
         int count = TransactionsDB.getInstance(this).getNoOfTransactionsForPerson(key);
             if(count > 0){
-                Alerts.MyAlert(this,"Can't Delete!","This person has some transactions so it can't be deleted!").show();
+                Alerts.MyAlert(this,getString(R.string.cantDelete),getString(R.string.thisPersonHasTransactionsSoItCantBeDeleted)).show();
             }else {
                 if (PersonsDB.getInstance(this).deleteBean(key)) {
                     setResult(RESULT_OK);
                     finish();
                 } else {
-
-                    super.ShowSnackbar(getString(R.string.cant_delete_this_person));
+                    ShowSnackbar(getString(R.string.cant_delete_this_person));
                 }
             }
     }
     private void onClearClick(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Clear Transactions")
-                .setMessage("Are you sure you want to delete All Transactions for this person ?!")
+        builder.setTitle(getString(R.string.clearTransactions))
+                .setMessage(getString(R.string.areYouSureYouWantToDeleteAllTransactionsForThisPerson))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         TransactionsDB.getInstance(PersonDetailActivity.this).DeleteAllForPerson(mBean.getKey());
-
                         refreshView();
-                        Toast.makeText(PersonDetailActivity.this,"All Cleared",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PersonDetailActivity.this,getString(R.string.deleted),Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

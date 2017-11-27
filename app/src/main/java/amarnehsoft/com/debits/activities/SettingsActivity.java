@@ -427,8 +427,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
     private static void LogoutClick(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Logout")
-                .setMessage("Please Export Data before logout, All local data will be deleted!, logout now?")
+        builder.setTitle(context.getString(R.string.logout))
+                .setMessage(context.getString(R.string.pleaseExportAllDataBeforeLogoutAllLocalDataWillBeDeletedLogoutNow))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         new SharedPreferenceController(context).setLogged(false);
@@ -466,12 +466,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     private static void ResetAllRemindersClick(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Reset All Reminders")
-                .setMessage("This will clear all Reminders!")
+        builder.setTitle(context.getString(R.string.deleteAllReminders))
+                .setMessage(context.getString(R.string.thisWillClearAllREminders))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         RemindersDB.getInstance(context).deleteAll();
-                        Alerts.MyAlert(context,"Done","Reminders cleared!").show();
+                        Alerts.MyAlert(context,context.getString(R.string.done),context.getString(R.string.remindersDeleted)).show();
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -484,12 +484,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
     private static void ResetAllTransactionsClick(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Reset All Transactions")
-                .setMessage("This will clear all Transactions!")
+        builder.setTitle(context.getString(R.string.deleteAllTransactions))
+                .setMessage(context.getString(R.string.thisWillClearAllTransactions))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         TransactionsDB.getInstance(context).deleteAll();
-                        Alerts.MyAlert(context,"Done","Transactions cleared!").show();
+                        Alerts.MyAlert(context,context.getString(R.string.done),context.getString(R.string.transactionsDeleted)).show();
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -502,8 +502,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
     private static void ResetAllClick(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Reset All")
-                .setMessage("This will clear all Data!")
+        builder.setTitle(context.getString(R.string.resetAll))
+                .setMessage(context.getString(R.string.thisWillClearAllData))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -514,7 +514,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         RemindersDB.getInstance(context).deleteAll();
 
 
-                            Alerts.MyAlert(context,"Done","All cleared!").show();
+                            Alerts.MyAlert(context,context.getString(R.string.done),context.getString(R.string.deleted)).show();
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -530,8 +530,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     private static void ImportClick(final Context context,final Preference preference){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Import Data")
-                .setMessage("Importing Data will override current Data!")
+        builder.setTitle(context.getString(R.string.importData))
+                .setMessage(context.getString(R.string.importingDataWillOverrideCurrentData))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String uid = new SharedPreferenceController(context).getUid();

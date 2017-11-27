@@ -22,7 +22,8 @@ import static android.app.Activity.RESULT_OK;
  * Created by jcc on 8/18/2017.
  */
 
-public class PersonsCatListFragment extends ListFragment {
+public class
+PersonsCatListFragment extends ListFragment {
 
 
 

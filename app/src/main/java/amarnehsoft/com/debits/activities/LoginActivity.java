@@ -154,7 +154,7 @@ public class LoginActivity extends AppCompatActivity{
                     if(dataSnapshot.exists()) {
                         boolean logged = dataSnapshot.child("logged").getValue(Boolean.class);
                         if (logged) {
-                            Toast.makeText(getApplicationContext(),"this user already used!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),getString(R.string.thisUserAlreadyLoggedInOnAnotherDevice),Toast.LENGTH_LONG).show();
                             Log.d(TAG, " this user already used!");
                             showProgress(false);
                         } else {

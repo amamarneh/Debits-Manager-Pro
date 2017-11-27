@@ -68,7 +68,7 @@ public class PersonCatDetailActivity extends ItemDetailActivity<PersonCat,Person
     @Override
     protected void onDeleteMenuItemClicked(String key) {
         if(PersonsDB.getInstance(this).getNoOfPersonsForCat(key) > 0){
-            Alerts.MyAlert(this,"Can't Delete","this Category has being used, it can't be deleted!").show();
+            Alerts.MyAlert(this,getString(R.string.cantDelete),getString(R.string.thisCatHasBeenUsedItCantBeDeleted)).show();
         }else {
             if (PersonCatsDB.getInstance(this).deleteBean(key)) {
                 setResult(RESULT_OK);
