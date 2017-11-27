@@ -1,0 +1,170 @@
+<resources>
+    <string name="app_name">Debits Manager Pro</string>
+    <string name="persons">الأشخاص</string>
+    <string name="personsCat">مجموعات الأشخاص</string>
+    <string name="debits">الديون</string>
+    <string name="balances">الصافي</string>
+    <string name="recieptsDates">تاريخ الاستلام</string>
+    <string name="curs">العملات</string>
+    <string name="title_activity_list">القائمة</string>
+    <string name="action_settings">الاعدادات</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="search">بحث</string>
+    <string name="search_hint">بحث</string>
+    <string name="delete">حذف</string>
+    <string name="person_detail">تفاصيل الشخص</string>
+    <string name="balance">صافي</string>
+    <string name="defualt_cat_name">مجموعة افتراضية</string>
+    <string name="save">حفظ</string>
+    <string name="not_valid_name">الاسم غير صحيح !</string>
+    <string name="saved_successfully">تم الحفظ بنجاح</string>
+    <string name="cat">المجموعة</string>
+    <string name="person_name">اسم الشخص</string>
+    <string name="amount">الكمية</string>
+    <string name="onMe">علي</string>
+    <string name="notes">ملاحظات</string>
+    <string name="defualt_cur_name">شيقل</string>
+    <string name="amount_field_not_valid">الكمية غير صحيحة !</string>
+    <string name="choosePerson">اختر شخص</string>
+    <string name="the_equ_must_be_greater_than_zero">القيمة المكافئة يجب ان تكون اكبر من صفر !
+    </string>
+    <string name="showAll">عرض الكل</string>
+    <string name="loading">تحميل ...</string>
+    <string name="reminders">تنبيهات</string>
+    <string name="add_person">اضافة شخص</string>
+    <string name="add_personCat">ااضافة مجموعة</string>
+    <string name="add_debit">اضافة دين</string>
+    <string name="add_payment">اضافة دفعة</string>
+    <string name="add_cur">اضافة عملة</string>
+
+    <string name="update_person">تعديل شخص</string>
+    <string name="update_personCat">تعديل مجموعة</string>
+    <string name="update_debit">تعديل دين</string>
+    <string name="update_payment">تعديل دفعة</string>
+    <string name="update_cur">تعديل عملة</string>
+
+    <string name="debits_and_payments">الديون والدفعات</string>
+    <string name="new_person_added_successfully">تم اضافة شخص جديد بنجاح</string>
+    <string name="added_successfully">تمت الاضافة بنجاح</string>
+    <string name="updated_successfully">تم التعديل بنجاح</string>
+    <string name="debit">دين</string>
+    <string name="payment">دفعة</string>
+    <string name="transactionDate">تاريخ الحركة</string>
+    <string name="reminderDate">تاريخ التذكير</string>
+    <string name="addReminder">اضافة تذكير</string>
+    <string name="updateRemider">تعديل تذكير</string>
+    <string name="theReminderDateWasGone">تاريخ التذكير انتهى !</string>
+    <string name="cant_delete_this_cur">لا يمكن حذف هذه العملة</string>
+    <string name="cant_delete_this_cat">لا يمكن حذف هذه المجموعة</string>
+    <string name="cant_delete_this_person">لا يمكن حذف هذا الشخص</string>
+    <string name="cant_delete_this_reminder">لا يمكن حذف هذا التذكير</string>
+    <string name="cant_delete_this_transaction">لا يمكن حذف هذه الحركة</string>
+    <string name="not_found">غير موجود</string>
+    <string name="payments">الدفعات</string>
+    <string name="curEqu">Cur equ</string>
+    <string name="title_activity_combine_persons">CombinePersonsActivity</string>
+    <string name="wait">انتظر</string>
+    <string name="nis">شيقل</string>
+    <string name="title_activity_settings">الاعدادات</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">اعدادات عامة</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">البيانات والنسخ الاحتياطي</string>
+
+    <string name="pref_title_sync_frequency">نسخ احتياطي كل :</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>10 دقائق</item>
+        <item>30 دقيقة</item>
+        <item>1 ساعة</item>
+        <item>5 ساعات</item>
+        <item>24 ساعة</item>
+        <item>ابدا</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>300</item>
+        <item>1440</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">البيانات</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">الاشعارات</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pref_data_reset">حذف البيانات</string>
+    <string name="title_activity_login">تسجيل الدخول</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">الايميل</string>
+    <string name="prompt_password">الرقم السري</string>
+    <string name="action_sign_in">تسجيل الدخول</string>
+    <string name="action_sign_in_short">تسجيل الدخول</string>
+    <string name="error_invalid_email">الايميل غير صحيح !</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">هذا الحقل مطلوب !</string>
+
+    <string name="auth_failed">فشلت المصادقة</string>
+    <string name="reset_data">حذف البيانات</string>
+    <string name="number_of_persons">عدد الاشخاص :</string>
+    <string name="number_of_cats">عدد المجموعات :</string>
+    <string name="total">المجموع</string>
+    <string name="number_of_cur">عدد العملات :</string>
+    <string name="sum">المجموع</string>
+    <string name="count">Count</string>
+    <string name="clear_all">حذف جميع الحركات</string>
+    <string name="person">الاشخاص</string>
+    <string name="cats">المجموعات</string>
+    <string name="Curs">العملات</string>
+    <string name="currency">العملة</string>
+    <string name="transaction_date">تاريخ الحركة</string>
+    <string name="settings">الاعدادات</string>
+    <string name="calculator">الحاسبة</string>
+</resources>
