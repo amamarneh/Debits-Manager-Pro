@@ -222,4 +222,6 @@
     <string name="newCategoryHasBeenAddedSuccessfully">تم اضافة مجموعة جديدة بنجاح</string>
     <string name="newPersonHasBeenAddedSuccessfully">تم اضافة شخص جديد بنجاح</string>
     <string name="newCurHasBeenAddedSuccessfully">تم اضافة عملة جديدة بنجاح</string>
+    <string name="language">اللغة</string>
+    <string name="chooseLanguage">اختر لغة</string>
 </resources>
