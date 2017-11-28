@@ -38,7 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import amarnehsoft.com.debits.R;
-import amarnehsoft.com.debits.controllers.SharedPreferenceController;
+import amarnehsoft.com.debits.controllers.SPController;
 import amarnehsoft.com.debits.db.CurDB;
 import amarnehsoft.com.debits.db.DBHelper;
 import amarnehsoft.com.debits.db.DBTools;
@@ -421,21 +421,21 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         CurDB.getInstance(context).deleteAll();
         PersonCatsDB.getInstance(context).deleteAll();
         RemindersDB.getInstance(context).deleteAll();
-        new SharedPreferenceController(context).clearDefualtPreferences();
-        new SharedPreferenceController(context).clearSharedPreferences();
+        SPController.newInstance(context).clearSharedPreferences();
         AlarmUtils.DeleteAlarm(context,AlarmUtils.CODE_EXPORT);
     }
+
     private static void LogoutClick(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(context.getString(R.string.logout))
                 .setMessage(context.getString(R.string.pleaseExportAllDataBeforeLogoutAllLocalDataWillBeDeletedLogoutNow))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        new SharedPreferenceController(context).setLogged(false);
+                        SPController.newInstance(context).setLogged(false);
 
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
                         reference.keepSynced(true);
-                        String uid = new SharedPreferenceController(context).getUid();
+                        String uid = SPController.newInstance(context).getUid();
                         if(uid != null){
                             reference.child(uid).child("user").child(uid).child("logged").setValue(false);
                         }
@@ -534,7 +534,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 .setMessage(context.getString(R.string.importingDataWillOverrideCurrentData))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        String uid = new SharedPreferenceController(context).getUid();
+                        String uid = SPController.newInstance(context).getUid();
                         if(uid == null)
                             return;
                        new DBTools(context,uid,DBTools.MODE_PUBLIC).ImportDB();
@@ -555,7 +555,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 .setMessage("You can't undo this operation later!")
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        String uid = new SharedPreferenceController(context).getUid();
+                        String uid = SPController.newInstance(context).getUid();
                         if(uid == null)
                             return;
                         new DBTools(preference.getContext(),uid,DBTools.MODE_PUBLIC).ExportDB();

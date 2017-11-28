@@ -223,7 +223,6 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
                 setupTitle(selectedType);
                 meRadioBtn.setChecked(true);
             }
-
         }
     }
 

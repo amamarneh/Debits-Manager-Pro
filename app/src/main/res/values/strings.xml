@@ -224,4 +224,6 @@
     <string name="newCategoryHasBeenAddedSuccessfully">New Category has been added successfully</string>
     <string name="newPersonHasBeenAddedSuccessfully">New Person has been added successfully</string>
     <string name="newCurHasBeenAddedSuccessfully">New Cerrency has been added successfully</string>
+    <string name="language">Language</string>
+    <string name="chooseLanguage">Choose language</string>
 </resources>

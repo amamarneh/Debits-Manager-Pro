@@ -57,7 +57,7 @@ import java.util.List;
 import java.util.Map;
 
 import amarnehsoft.com.debits.R;
-import amarnehsoft.com.debits.controllers.SharedPreferenceController;
+import amarnehsoft.com.debits.controllers.SPController;
 import amarnehsoft.com.debits.db.CurDB;
 import amarnehsoft.com.debits.db.DBTools;
 import amarnehsoft.com.debits.db.PersonCatsDB;
@@ -219,7 +219,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private void tryLogging() {
-        boolean logged = new SharedPreferenceController(this).getLogged();
+        boolean logged = SPController.newInstance(this).getLogged();
         if(logged)
         {
             GoToMain(false);
@@ -228,16 +228,13 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private void saveLogging(String uid) {
-        new SharedPreferenceController(this).setLogged(true);
-        new SharedPreferenceController(this).setUid(uid);
+        SPController.newInstance(this).setLogged(true);
+        SPController.newInstance(this).setUid(uid);
         String email = mAuth.getCurrentUser().getEmail();
-        new SharedPreferenceController(this).setEmail(email);
+        SPController.newInstance(this).setEmail(email);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(uid).child("user").child(uid);
         reference.child("logged").setValue(true);
-
     }
-
-
 
     @Override
     public void onStart() {

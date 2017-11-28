@@ -46,6 +46,7 @@ import amarnehsoft.com.debits.db.DBTools;
 import amarnehsoft.com.debits.db.PersonCatsDB;
 import amarnehsoft.com.debits.db.PersonsDB;
 import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.fragments.dialogs.LanguagesDialogFragment;
 import amarnehsoft.com.debits.utils.AlarmUtils;
 import amarnehsoft.com.debits.utils.MyColors;
 import amarnehsoft.com.debits.utils.NumberUtils;
@@ -280,6 +281,10 @@ public class MainActivity extends AppCompatActivity {
                 //finish();
             }
             return true;
+        }
+
+        if(id == R.id.menu_language){
+            LanguagesDialogFragment.newInstance().show(getSupportFragmentManager(),LanguagesDialogFragment.TAG);
         }
 
         return super.onOptionsItemSelected(item);
