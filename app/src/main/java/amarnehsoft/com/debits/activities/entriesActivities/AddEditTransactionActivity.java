@@ -197,7 +197,7 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
         });
         //
         setupTitle(selectedType);
-        txtAmount.requestFocus();
+        //txtAmount.requestFocus();
     }
 
     private void HandlingMap() {

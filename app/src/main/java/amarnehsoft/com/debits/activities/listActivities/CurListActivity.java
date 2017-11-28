@@ -48,7 +48,7 @@ public class CurListActivity extends ListActivity {
                 Cur bean = data.getParcelableExtra("data");
                 mFragment.setupRecyclerView();
                 if (bean != null)
-                    super.ShowSnackbar("[" + bean.getName() + "] " +  getString(R.string.added_successfully));
+                    super.ShowSnackbar(getString(R.string.newCurHasBeenAddedSuccessfully) + " ( "+ bean.getName() + " )");
             }
         }
     }

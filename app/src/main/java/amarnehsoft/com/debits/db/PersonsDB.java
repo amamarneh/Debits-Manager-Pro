@@ -44,23 +44,8 @@ public class PersonsDB<B extends Person,T extends PersonTable> extends DBHelper<
         }
         return count;
     }
-    public int getNoOfPersons(){
-        int count = 0;
-        String sql = "SELECT COUNT(*) FROM " + T.TBL_NAME;
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery(sql, null);
-            if(cursor.moveToFirst())
-                count = cursor.getInt(0);
 
-        }finally {
-            if(cursor != null)
-                cursor.close();
-            db.close();
-        }
-        return count;
-    }
+
     public List<B> getAll(int isDeleted,String catCode)
     {
 
@@ -190,6 +175,11 @@ public class PersonsDB<B extends Person,T extends PersonTable> extends DBHelper<
         }
 
         return bean;
+    }
+
+    @Override
+    protected String getTableName() {
+        return T.TBL_NAME;
     }
 
     public B getBeanByName(String name)

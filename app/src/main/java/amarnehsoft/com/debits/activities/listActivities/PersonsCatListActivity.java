@@ -48,7 +48,7 @@ public class PersonsCatListActivity extends ListActivity {
                 PersonCat cat = data.getParcelableExtra("data");
                 mFragment.setupRecyclerView();
                 if (cat != null)
-                 super.ShowSnackbar("[" + cat.getName() + "] " +  getString(R.string.added_successfully));
+                 super.ShowSnackbar(getString(R.string.newCategoryHasBeenAddedSuccessfully) + " ( " + cat.getName() + " )");
             }
         }
     }

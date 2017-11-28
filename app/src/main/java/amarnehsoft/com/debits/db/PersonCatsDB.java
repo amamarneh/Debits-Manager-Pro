@@ -32,23 +32,6 @@ public class PersonCatsDB<B extends PersonCat,T extends PersonCatTable> extends 
         super(context,PersonCat.class);
     }
 
-    public int getNoOfCats(){
-        int count = 0;
-        String sql = "SELECT COUNT(*) FROM " + T.TBL_NAME;
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery(sql, null);
-            if(cursor.moveToFirst())
-                count = cursor.getInt(0);
-
-        }finally {
-            if(cursor != null)
-                cursor.close();
-            db.close();
-        }
-        return count;
-    }
     public List<B> getAll()
     {
         int isDeleted = -1;
@@ -144,6 +127,11 @@ public class PersonCatsDB<B extends PersonCat,T extends PersonCatTable> extends 
                 rs.close();
         }
         return bean;
+    }
+
+    @Override
+    protected String getTableName() {
+        return T.TBL_NAME;
     }
 
     public int updateBean(B bean)

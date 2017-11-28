@@ -120,6 +120,11 @@ public class RemindersDB<B extends Reminder,T extends RemindersTable> extends DB
         return bean;
     }
 
+    @Override
+    protected String getTableName() {
+        return T.TBL_NAME;
+    }
+
     public int updateBean(B bean)
     {
         SQLiteDatabase db = getWritableDatabase();

@@ -78,9 +78,9 @@ public class TransactionListActivity extends ListActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_ADD){
             if (resultCode== RESULT_OK){
-                Transaction bean = data.getParcelableExtra("data");
+                //Transaction bean = data.getParcelableExtra("data");
                 mFragment.setupRecyclerView();
-                ShowSnackbar(getString(R.string.newTrans) + " " +  getString(R.string.added_successfully));
+                ShowSnackbar(getString(R.string.newTransactionAddedSuccessfully));
             }
         }
     }

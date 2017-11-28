@@ -74,5 +74,24 @@ public abstract class DBHelper<T> extends SQLiteOpenHelper
         onCreate(db);
     }
 
+    public int getNoOfBeans(){
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM " + getTableName();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery(sql, null);
+            if(cursor.moveToFirst())
+                count = cursor.getInt(0);
+
+        }finally {
+            if(cursor != null)
+                cursor.close();
+            db.close();
+        }
+        return count;
+    }
+
     public abstract T getBeanById(String id);
+    protected abstract String getTableName();
 }

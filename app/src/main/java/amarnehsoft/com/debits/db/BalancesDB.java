@@ -26,6 +26,12 @@ public class BalancesDB extends DBHelper<CustomBalance> {
     public CustomBalance getBeanById(String id) {
         return null;
     }
+
+    @Override
+    protected String getTableName() {
+        return null;
+    }
+
     public  List<CustomBalance> getCustomBalances(String query,int orderType,boolean asc){
         //select pp.id,name,(select sum(amount) from balances where type =0 and id = outer.id ) -
         // (select sum(amount) from balances where type = 1 and outer.id = id)  as TOTAL from balances  outer right outer join pp on outer.id = pp.id group by outer.id,pp.id,name

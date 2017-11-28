@@ -82,23 +82,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     private List<DashboardItem> getItems(){
-        DashboardItem personsItem = new DashboardItem(TAG_PERSONS,getResources().getDrawable(R.drawable.ic_person_black_48dp),getString(R.string.persons));
+        DashboardItem personsItem = new DashboardItem(TAG_PERSONS,getResources().getDrawable(R.drawable.ic_person_black_48dp),getString(R.string.thePersons));
         DashboardItem personsCatItem = new DashboardItem(TAG_PERSONS_CAT,getResources().getDrawable(R.drawable.ic_credit_card_black_36dp),getString(R.string.personsCat));
-        DashboardItem debitsItem = new DashboardItem(TAG_DEBTS,getResources().getDrawable(R.drawable.debits),getString(R.string.debits));
-        DashboardItem paymentsItem = new DashboardItem(TAG_PAYMENTS,getResources().getDrawable(R.drawable.payments),getString(R.string.payments));
-        DashboardItem balancesItem = new DashboardItem(TAG_BALANCES,getResources().getDrawable(R.drawable.bal),getString(R.string.balances));
+        DashboardItem debitsItem = new DashboardItem(TAG_DEBTS,getResources().getDrawable(R.drawable.debits),getString(R.string.theDebits));
+        DashboardItem paymentsItem = new DashboardItem(TAG_PAYMENTS,getResources().getDrawable(R.drawable.payments),getString(R.string.thePayments));
+        DashboardItem balancesItem = new DashboardItem(TAG_BALANCES,getResources().getDrawable(R.drawable.bal),getString(R.string.theBalances));
 //        DashboardItem datesItem = new DashboardItem(TAG_RECIEPTS_DATE,getResources().getDrawable(R.drawable.ic_alarm_black_36dp),getString(R.string.recieptsDates));
-        DashboardItem curItem = new DashboardItem(TAG_CUR,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.curs));
+        DashboardItem curItem = new DashboardItem(TAG_CUR,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.theCurs));
 
-        int personsCount = PersonsDB.getInstance(this).getNoOfPersons();
-        int catCount = PersonCatsDB.getInstance(this).getNoOfCats();
-        int curCount = CurDB.getInstance(this).getNoOfCur();
+        int personsCount = PersonsDB.getInstance(this).getNoOfBeans();
+        int catCount = PersonCatsDB.getInstance(this).getNoOfBeans();
+        int curCount = CurDB.getInstance(this).getNoOfBeans();
         double debitsSum = TransactionsDB.getInstance(this).getSumOfTransaction(0);
         double paymentsSum = TransactionsDB.getInstance(this).getSumOfTransaction(1);
         double balanceSum = debitsSum - paymentsSum;
         String balanceType= balanceSum>=0?getString(R.string.debits):getString(R.string.payments);
         Cur cur = CurDB.getInstance(this).getDefualtBean();
-        personsItem.setSummery( personsCount + " " + getString(R.string.person));
+        personsItem.setSummery( personsCount + " " + getString(R.string.persons));
         personsCatItem.setSummery( catCount+ " " + getString(R.string.cats));
         debitsItem.setSummery(NumberUtils.Round(debitsSum) + " " + cur.getName());
         paymentsItem.setSummery( NumberUtils.Round(paymentsSum) + " " + cur.getName());
@@ -186,8 +186,6 @@ public class MainActivity extends AppCompatActivity {
             mImageView.setImageDrawable(item.getDrawable());
             mSummeryTextView.setText(item.getSummery());
             lineView.setBackgroundColor(item.getLineColor());
-
-
         }
 
         @Override
@@ -210,23 +208,13 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(BalanceListActivity.getIntent(MainActivity.this,1,2));
                     break;
                 case TAG_RECIEPTS_DATE:
-                    Test();
                     startActivity(ReminderListActivity.getIntent(MainActivity.this,1,-1));
                     break;
                 case TAG_CUR:
                     startActivity(CurListActivity.getIntent(MainActivity.this,1,ListActivity.MODE_VIEW));
-//                    DBTools.ImportDB(getApplicationContext());
                     break;
             }
         }
-    }
-
-    private void Test() {
-        try {
-//            DBTools.copy(new File(Environment.getExternalStorageDirectory() + "/database_copy.db"), getDatabasePath("debits.db"));
-//            Log.d("Amarneh","Moved!");
-//            DBTools.ExportDB(this);
-        }catch (Exception e){e.printStackTrace();}
     }
 
     private class Adapter extends RecyclerView.Adapter<Holder>

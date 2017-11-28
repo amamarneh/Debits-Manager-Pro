@@ -55,7 +55,7 @@ public class ReminderListActivity extends ListActivity {
             if (resultCode== RESULT_OK){
                 Reminder bean = data.getParcelableExtra("data");
                 mFragment.setupRecyclerView();
-                super.ShowSnackbar(getString(R.string.newReminder)+ " " +  getString(R.string.added_successfully));
+                super.ShowSnackbar(getString(R.string.newReminderHasBeenAddedSuccessfully));
             }
         }
     }

@@ -213,4 +213,15 @@
     <string name="to">To</string>
     <string name="now">Now</string>
     <string name="creationDate">Creation Date:</string>
+    <string name="thePersons">Persons</string>
+    <string name="theDebits">Debits</string>
+    <string name="thePayments">Payments</string>
+    <string name="theBalances">Balances</string>
+    <string name="theCurs">Currencies</string>
+    <string name="theBalance">Balance</string>
+    <string name="newTransactionAddedSuccessfully">New Transaction has been added successfully</string>
+    <string name="newReminderHasBeenAddedSuccessfully">New Reminder has been added successfully</string>
+    <string name="newCategoryHasBeenAddedSuccessfully">New Category has been added successfully</string>
+    <string name="newPersonHasBeenAddedSuccessfully">New Person has been added successfully</string>
+    <string name="newCurHasBeenAddedSuccessfully">New Cerrency has been added successfully</string>
 </resources>

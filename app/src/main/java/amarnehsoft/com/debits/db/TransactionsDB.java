@@ -358,6 +358,11 @@ public class TransactionsDB<B extends Transaction,T extends TransactionsTable> e
         return bean;
     }
 
+    @Override
+    protected String getTableName() {
+        return T.TBL_NAME;
+    }
+
     public int updateBean(B bean)
     {
         SQLiteDatabase db = getWritableDatabase();

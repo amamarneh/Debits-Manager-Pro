@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Debits Manager Pro</string>
-    <string name="persons">الأشخاص</string>
+    <string name="persons">أشخاص</string>
     <string name="personsCat">مجموعات الأشخاص</string>
-    <string name="debits">الديون</string>
+    <string name="debits">ديون</string>
     <string name="balances">الصافي</string>
-    <string name="recieptsDates">تاريخ الاستلام</string>
-    <string name="curs">العملات</string>
+    <string name="recieptsDates">recieptsDates</string>
+    <string name="curs">عملات</string>
     <string name="title_activity_list">القائمة</string>
     <string name="action_settings">الاعدادات</string>
     <string name="title_activity_main2">Main2Activity</string>
@@ -18,13 +18,13 @@
     <string name="save">حفظ</string>
     <string name="not_valid_name">الاسم غير صحيح !</string>
     <string name="saved_successfully">تم الحفظ بنجاح</string>
-    <string name="cat">المجموعة</string>
+    <string name="cat">مجموعة</string>
     <string name="person_name">اسم الشخص</string>
-    <string name="amount">الكمية</string>
+    <string name="amount">المبلغ</string>
     <string name="onMe">علي</string>
     <string name="notes">ملاحظات</string>
     <string name="defualt_cur_name">شيقل</string>
-    <string name="amount_field_not_valid">الكمية غير صحيحة !</string>
+    <string name="amount_field_not_valid">المبلغ غير صحيح !</string>
     <string name="choosePerson">اختر شخص</string>
     <string name="the_equ_must_be_greater_than_zero">القيمة المكافئة يجب ان تكون اكبر من صفر !
     </string>
@@ -160,9 +160,9 @@
     <string name="sum">المجموع</string>
     <string name="count">Count</string>
     <string name="clear_all">حذف جميع الحركات</string>
-    <string name="person">الاشخاص</string>
-    <string name="cats">المجموعات</string>
-    <string name="Curs">العملات</string>
+    <string name="person">شخص</string>
+    <string name="cats">مجموعات</string>
+    <string name="Curs">عملات</string>
     <string name="currency">العملة</string>
     <string name="transaction_date">تاريخ الحركة</string>
     <string name="settings">الاعدادات</string>
@@ -211,4 +211,15 @@
     <string name="to">الى</string>
     <string name="now">الان</string>
     <string name="creationDate">تاريخ الانشاء :</string>
+    <string name="thePersons">الأشخاص</string>
+    <string name="theDebits">الديون</string>
+    <string name="thePayments">الدفعات</string>
+    <string name="theBalances">الصافي</string>
+    <string name="theCurs">العملات</string>
+    <string name="theBalance">الصافي</string>
+    <string name="newTransactionAddedSuccessfully">تمت اضافة حركة جديدة بنجاح</string>
+    <string name="newReminderHasBeenAddedSuccessfully">تم اضافة تذكير جديد بنجاح</string>
+    <string name="newCategoryHasBeenAddedSuccessfully">تم اضافة مجموعة جديدة بنجاح</string>
+    <string name="newPersonHasBeenAddedSuccessfully">تم اضافة شخص جديد بنجاح</string>
+    <string name="newCurHasBeenAddedSuccessfully">تم اضافة عملة جديدة بنجاح</string>
 </resources>

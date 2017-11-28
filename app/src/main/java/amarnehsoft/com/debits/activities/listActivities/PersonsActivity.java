@@ -48,7 +48,7 @@ public class PersonsActivity extends ListActivity {
                 Person person = data.getParcelableExtra("data");
                 mFragment.setupRecyclerView();
                 if (person != null)
-                super.ShowSnackbar("[" + person.getName() + "] " +  getString(R.string.added_successfully));
+                super.ShowSnackbar(getString(R.string.newPersonHasBeenAddedSuccessfully) + " ( " + person.getName() + " )");
             }
         }
     }

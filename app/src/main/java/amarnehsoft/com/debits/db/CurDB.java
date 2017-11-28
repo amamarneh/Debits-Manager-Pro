@@ -28,23 +28,7 @@ public class CurDB<B extends Cur,T extends CurTable> extends DBHelper<Cur>{
         }
         return instance;
     }
-    public int getNoOfCur(){
-        int count = 0;
-        String sql = "SELECT COUNT(*) FROM " + T.TBL_NAME;
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery(sql, null);
-            if(cursor.moveToFirst())
-                count = cursor.getInt(0);
 
-        }finally {
-            if(cursor != null)
-                cursor.close();
-            db.close();
-        }
-        return count;
-    }
     private CurDB(Context context) {
         super(context,Cur.class);
     }
@@ -156,6 +140,11 @@ public class CurDB<B extends Cur,T extends CurTable> extends DBHelper<Cur>{
              rs.close();
         }
         return bean;
+    }
+
+    @Override
+    protected String getTableName() {
+        return T.TBL_NAME;
     }
 
     public int updateBean(B bean)
