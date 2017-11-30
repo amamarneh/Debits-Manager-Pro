@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Debits.iml" filepath="$PROJECT_DIR$/Debits.iml" />
+      <module fileurl="file://C:\Users\alaam\Documents\MEGA\WorkArea\Android\AM\Debits-Manager-Pro\Debits.iml" filepath="C:\Users\alaam\Documents\MEGA\WorkArea\Android\AM\Debits-Manager-Pro\Debits.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Debits-Manager-Pro.iml" filepath="$PROJECT_DIR$/Debits-Manager-Pro.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\alaam\Documents\MEGA\WorkArea\Android\AM\Debits-Manager-Pro\app\app.iml" filepath="C:\Users\alaam\Documents\MEGA\WorkArea\Android\AM\Debits-Manager-Pro\app\app.iml" />
     </modules>
   </component>
 </project>
