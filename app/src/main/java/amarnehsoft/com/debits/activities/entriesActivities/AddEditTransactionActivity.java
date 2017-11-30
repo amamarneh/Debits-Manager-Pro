@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +38,9 @@ import amarnehsoft.com.debits.activities.listActivities.PersonsActivity;
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Transaction;
+import amarnehsoft.com.debits.controllers.BalancesController;
+import amarnehsoft.com.debits.controllers.SPController;
+import amarnehsoft.com.debits.db.BalancesDB;
 import amarnehsoft.com.debits.db.CurDB;
 import amarnehsoft.com.debits.db.PersonsDB;
 import amarnehsoft.com.debits.db.TransactionsDB;
@@ -56,11 +61,10 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
 
     private AutoCompleteTextView txtName;
     private EditText txtAmount, txtNotes,txtCurEqu;
-    private Button txtCur,txtTransDate;
+    private TextView txtBalance;
+    private Button txtCur,txtTransDate,btnSave,btnChoosePerson;
     private RadioButton meRadioBtn,onMeRadioBtn;
-    private Button btnSave;
-    private Button btnChoosePerson;
-    private View btnCalculator;
+    private View btnCalculator,balanceLayout;
     private Transaction mBean;
     private Cur selectedCur;
     private Date selectedTransDate;
@@ -97,6 +101,8 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
         meRadioBtn = (RadioButton)findViewById(R.id.meRadioBtn);
         onMeRadioBtn = (RadioButton)findViewById(R.id.onMeRadioBtn);
         btnCalculator=findViewById(R.id.btnCalc);
+        txtBalance = (TextView)findViewById(R.id.txtBalance);
+        balanceLayout = findViewById(R.id.balanceLayout);
 
         btnCalculator.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,7 +200,6 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
             selectedType = 0;
             meRadioBtn.setChecked(true);
             HandlingMap();
-
         }
 
 
@@ -278,6 +283,48 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
                 (this, android.R.layout.select_dialog_item, arrPersons);
 
         txtName.setAdapter(adapter);
+
+        txtName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Person person = PersonsDB.getInstance(AddEditTransactionActivity.this).getBeanByName(s.toString());
+                if (person != null){
+                    showBalanceForPerson(person);
+                }else {
+                    hideBalanceLayout();
+                }
+            }
+        });
+    }
+
+    private void showBalanceForPerson(Person person){
+        balanceLayout.setVisibility(View.VISIBLE);
+        double balance = BalancesController.getTotalBalance(this,person.getKey());
+        if (balance == 0){
+            txtBalance.setText("0.0");
+        }else if (balance > 0){
+            txtBalance.setTextColor(getResources().getColor(R.color.debitColor));
+            txtBalance.setText(balance + " " + SPController.newInstance(this).getBaseCur().getName()+" " + getString(R.string.debits));
+        }else {
+            //balance < 0
+            balance=-balance;
+            txtBalance.setTextColor(getResources().getColor(R.color.paymentColor));
+            txtBalance.setText(balance + " " + SPController.newInstance(this).getBaseCur().getName()+" " + getString(R.string.credits));
+        }
+    }
+
+    private void hideBalanceLayout(){
+        balanceLayout.setVisibility(View.GONE);
     }
 
     private String formatDate(Date date){

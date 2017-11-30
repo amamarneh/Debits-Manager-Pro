@@ -224,4 +224,7 @@
     <string name="newCurHasBeenAddedSuccessfully">تم اضافة عملة جديدة بنجاح</string>
     <string name="language">اللغة</string>
     <string name="chooseLanguage">اختر لغة</string>
+    <string name="theCalculator">الآلة الحاسبة</string>
+    <string name="theBalaceForThisPerson">الرصيد لهذا الشخص هو </string>
+    <string name="credits">مستحقات</string>
 </resources>

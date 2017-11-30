@@ -3,6 +3,9 @@ package amarnehsoft.com.debits.controllers;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import amarnehsoft.com.debits.beans.Cur;
+import amarnehsoft.com.debits.db.CurDB;
+
 /**
  * Created by alaam on 10/6/2017.
  */
@@ -17,6 +20,7 @@ public class SPController {
     private static final String ARG_SYNC_FREQ = "sync_frequency";
     private static final String ARG_EMAIL_KEY = "email_key";
     private static final String ARG_LANGUAGE="language";
+    private static final String ARG_BASE_CUR="baseCur";
 
     private Context mContext;
     private SharedPreferences sharedPreferences;
@@ -77,6 +81,15 @@ public class SPController {
         }
     }
 
+    public Cur getBaseCur(){
+        String curId=sharedPreferences.getString(ARG_BASE_CUR, CurDB.getInstance(mContext).getDefualtBean().getCode());
+        if (curId != null) return CurDB.getInstance(mContext).getBeanById(curId);
+        return null;
+    }
+
+    public void setBaseCur(Cur cur){
+        sharedPreferences.edit().putString(ARG_BASE_CUR,cur.getCode()).apply();
+    }
 
     public void clearSharedPreferences(){
         sharedPreferences.edit().clear().apply();

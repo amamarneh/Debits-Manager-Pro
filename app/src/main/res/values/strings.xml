@@ -227,4 +227,6 @@
     <string name="language">Language</string>
     <string name="chooseLanguage">Choose language</string>
     <string name="theCalculator">Calculator</string>
+    <string name="theBalaceForThisPerson">The balance for this person is</string>
+    <string name="credits">Credits</string>
 </resources>

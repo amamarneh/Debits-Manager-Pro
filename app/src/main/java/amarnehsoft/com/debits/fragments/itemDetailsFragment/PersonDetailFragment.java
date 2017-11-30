@@ -108,15 +108,6 @@ public class PersonDetailFragment extends ItemDetailFragment<Person> {
 
 
             refreshView();
-
-            phoneImg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    //callIntent.setData(Uri.parse("tel:" + mItem.getPhone()));
-                    //startActivity(callIntent);
-                }
-            });
         }
 
         return rootView;
