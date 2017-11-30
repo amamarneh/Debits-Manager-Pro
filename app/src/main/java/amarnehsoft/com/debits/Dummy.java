@@ -24,7 +24,7 @@ import amarnehsoft.com.debits.db.TransactionsDB;
 /**
  * Created by jcc on 8/18/2017.
  */
-
+//a
 public class Dummy {
     public static void setDummyData(Context ctx){
         PersonsDB.getInstance(ctx).deleteAll();
