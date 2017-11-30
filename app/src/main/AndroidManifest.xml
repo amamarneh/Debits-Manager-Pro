@@ -3,11 +3,9 @@
     package="amarnehsoft.com.debits">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,9 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
-
-        </activity>
+        <activity android:name=".activities.MainActivity"></activity>
         <activity
             android:name=".activities.listActivities.PersonsActivity"
             android:label="@string/persons"
@@ -147,13 +143,11 @@
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.MainActivity" />
 
-        <receiver android:name=".Services.AlarmReceiver"></receiver>
+        <receiver android:name=".Services.AlarmReceiver" />
 
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login">
-
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -167,16 +161,19 @@
         <service
             android:name=".Services.FloatingViewService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
 
-        <receiver android:name=".providers.SimpleWidgetProvider" >
+        <receiver android:name=".providers.SimpleWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                       android:resource="@xml/simple_widget_info" />
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/simple_widget_info" />
         </receiver>
 
+        <activity android:name=".activities.CalculatorActivity"></activity>
     </application>
 
 </manifest>

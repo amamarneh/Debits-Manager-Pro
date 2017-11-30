@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import amarnehsoft.com.debits.controllers.SPController;
+
 /**
  * Created by alaam on 10/5/2017.
  */
@@ -14,8 +16,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sp = getSharedPreferences("db",MODE_PRIVATE);
-        boolean logged = sp.getBoolean("logged",false);
+        boolean logged = SPController.newInstance(this).getLogged();
         if(logged)
         {
             Intent intent = new Intent(this, MainActivity.class);
@@ -26,7 +27,5 @@ public class SplashActivity extends Activity {
             startActivity(intent);
             finish();
         }
-
-
     }
 }

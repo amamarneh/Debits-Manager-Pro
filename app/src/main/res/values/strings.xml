@@ -226,4 +226,5 @@
     <string name="newCurHasBeenAddedSuccessfully">New Cerrency has been added successfully</string>
     <string name="language">Language</string>
     <string name="chooseLanguage">Choose language</string>
+    <string name="theCalculator">Calculator</string>
 </resources>

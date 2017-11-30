@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.UUID;
 
 import amarnehsoft.com.debits.R;
+import amarnehsoft.com.debits.activities.CalculatorActivity;
 import amarnehsoft.com.debits.activities.listActivities.CurListActivity;
 import amarnehsoft.com.debits.activities.listActivities.ListActivity;
 import amarnehsoft.com.debits.activities.listActivities.PersonsActivity;
@@ -48,6 +49,7 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
 
     public static final int REQ_SELECT_PERSON = 1;
     public static final int REQ_SELECT_CUR=2;
+    public static final int REQ_CALCULATOR=3;
 
     private final int TYPE_DEBIT = 0;
     private final int TYPE_PAYMENT = 1;
@@ -58,7 +60,7 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
     private RadioButton meRadioBtn,onMeRadioBtn;
     private Button btnSave;
     private Button btnChoosePerson;
-
+    private View btnCalculator;
     private Transaction mBean;
     private Cur selectedCur;
     private Date selectedTransDate;
@@ -94,6 +96,14 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
         txtTransDate = (Button)findViewById(R.id.txtTransDate);
         meRadioBtn = (RadioButton)findViewById(R.id.meRadioBtn);
         onMeRadioBtn = (RadioButton)findViewById(R.id.onMeRadioBtn);
+        btnCalculator=findViewById(R.id.btnCalc);
+
+        btnCalculator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(CalculatorActivity.newIntent(AddEditTransactionActivity.this,null,txtAmount.getText().toString()),REQ_CALCULATOR);
+            }
+        });
 
         meRadioBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -409,6 +419,11 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
                     else
                         showCurEquLayout(true);
                 }
+            }
+
+            if (requestCode == REQ_CALCULATOR){
+                double result = data.getDoubleExtra(CalculatorActivity.ARG_RESULT,0.0);
+                txtAmount.setText(result + "");
             }
         }
     }
