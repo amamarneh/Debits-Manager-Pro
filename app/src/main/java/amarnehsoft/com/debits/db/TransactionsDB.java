@@ -245,7 +245,8 @@ public class TransactionsDB<B extends Transaction,T extends TransactionsTable> e
                 + T.Cols.AMOUNT + ", "
                 + T.TBL_NAME + "." +T.Cols.CODE + ", "
                 + CurTable.TBL_NAME + "." +CurTable.Cols.NAME + ", "
-                + T.Cols.TYPE
+                + T.Cols.TYPE + ", "
+                + T.Cols.PAYMENT_METHOD
                 + " FROM " + T.TBL_NAME + " join "+ PersonTable.TBL_NAME+ " on " + T.Cols.PERSON_CODE + " = " + PersonTable.TBL_NAME + "." +PersonTable.Cols.KEY
                 + " left join " + CurTable.TBL_NAME + " on " + T.Cols.CUR_CODE + " = " + CurTable.TBL_NAME + "." + CurTable.Cols.CODE
                 + "  WHERE 1=1 ";
@@ -300,6 +301,7 @@ public class TransactionsDB<B extends Transaction,T extends TransactionsTable> e
                     transaction.setAmount(rs.getDouble(2));
                     transaction.setType(rs.getInt(5));
                     transaction.setCurName(rs.getString(4));
+                    transaction.setPaymentMethod(rs.getInt(6));
                     list.add(transaction);
                     rs.moveToNext();
                 }
@@ -320,6 +322,10 @@ public class TransactionsDB<B extends Transaction,T extends TransactionsTable> e
         bean.setCreationDate(new Date(rs.getLong(rs.getColumnIndex(T.Cols.CREATION_DATE))));
         bean.setTransDate(new Date(rs.getLong(rs.getColumnIndex(T.Cols.TRANS_DATE))));
         bean.setCurEqu(rs.getDouble(rs.getColumnIndex(T.Cols.CUR_EQU)));
+        bean.setPaymentMethod(rs.getInt(rs.getColumnIndex(T.Cols.PAYMENT_METHOD)));
+        bean.setBankCode(rs.getString(rs.getColumnIndex(T.Cols.BANK_CODE)));
+        bean.setCheckNum(rs.getString(rs.getColumnIndex(T.Cols.CHECK_NUM)));
+        bean.setCheckDate(new Date(rs.getLong(rs.getColumnIndex(T.Cols.CHECK_DATE))));
     }
 
     public int saveBean(B bean)
@@ -401,6 +407,11 @@ public class TransactionsDB<B extends Transaction,T extends TransactionsTable> e
         values.put(T.Cols.CREATION_DATE, bean.getCreationDate().getTime());
         values.put(T.Cols.TRANS_DATE, bean.getTransDate().getTime());
         values.put(T.Cols.CUR_EQU,bean.getCurEqu());
+        values.put(T.Cols.PAYMENT_METHOD,bean.getPaymentMethod());
+        values.put(T.Cols.BANK_CODE,bean.getBankCode());
+        values.put(T.Cols.CHECK_NUM,bean.getCheckNum());
+
+        values.put(T.Cols.CHECK_DATE,bean.getCheckDate() != null ? bean.getCheckDate().getTime() : 0);
     }
 
     public int deleteAll()

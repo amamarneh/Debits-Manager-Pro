@@ -10,10 +10,13 @@ import android.widget.TextView;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.itemDetailActivities.ItemDetailActivity;
+import amarnehsoft.com.debits.beans.Bank;
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.PersonCat;
 import amarnehsoft.com.debits.beans.Transaction;
+import amarnehsoft.com.debits.constants.PaymentMethod;
+import amarnehsoft.com.debits.db.BanksDB;
 import amarnehsoft.com.debits.db.CurDB;
 import amarnehsoft.com.debits.db.PersonCatsDB;
 import amarnehsoft.com.debits.db.PersonsDB;
@@ -24,7 +27,8 @@ import amarnehsoft.com.debits.utils.MyColors;
 
 public class TransactionDetailFragment extends ItemDetailFragment<Transaction> {
 
-    private TextView person_text_view, transDate_text_view, amount_text_view, cur_text_view, creationDate_text_view, notes_text_view;
+    private TextView person_text_view, transDate_text_view, amount_text_view, cur_text_view, creationDate_text_view, notes_text_view,
+                    txtPaymentType,txtBankName,txtCheckNum,txtCheckDate;
 
     public static ItemDetailFragment newInstance(String tranCode){
         ItemDetailFragment fragment = new TransactionDetailFragment();
@@ -60,6 +64,10 @@ public class TransactionDetailFragment extends ItemDetailFragment<Transaction> {
         cur_text_view = (TextView)rootView.findViewById(R.id.cur_text_view);
         creationDate_text_view=  (TextView)rootView.findViewById(R.id.creationDate_text_view);
         notes_text_view = (TextView)rootView.findViewById(R.id.notes_text_view);
+        txtPaymentType = (TextView)rootView.findViewById(R.id.txtPaymentMethod);
+        txtBankName = (TextView)rootView.findViewById(R.id.txtBank);
+        txtCheckNum = (TextView)rootView.findViewById(R.id.txtCheckNum);
+        txtCheckDate = (TextView)rootView.findViewById(R.id.txtCheckDate);
 
         if (mItem != null) {
             refreshView();
@@ -86,5 +94,24 @@ public class TransactionDetailFragment extends ItemDetailFragment<Transaction> {
 
         creationDate_text_view.setText(DateUtils.formatDate( mItem.getCreationDate()));
         notes_text_view.setText(mItem.getNotes());
+
+        PaymentMethod method = PaymentMethod.get(mItem.getPaymentMethod());
+        txtPaymentType.setText(method.getString(getContext()));
+        if (method == PaymentMethod.CHECK){
+            String bankName ="";
+            Bank bank = BanksDB.getInstance(getContext()).getBeanById(mItem.getBankCode());
+            if (bank != null) bankName = bank.getName();
+            txtBankName.setText(bankName);
+            txtCheckNum.setText(mItem.getCheckNum());
+            txtCheckDate.setText(DateUtils.formatDateWithoutTime(mItem.getCheckDate()));
+
+            txtBankName.setVisibility(View.VISIBLE);
+            txtCheckDate.setVisibility(View.VISIBLE);
+            txtCheckNum.setVisibility(View.VISIBLE);
+        }else {
+            txtBankName.setVisibility(View.GONE);
+            txtCheckNum.setVisibility(View.GONE);
+            txtCheckDate.setVisibility(View.GONE);
+        }
     }
 }

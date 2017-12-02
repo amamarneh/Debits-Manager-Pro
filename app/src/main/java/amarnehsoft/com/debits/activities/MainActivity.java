@@ -33,6 +33,7 @@ import amarnehsoft.com.debits.Dummy;
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.Services.FloatingViewService;
 import amarnehsoft.com.debits.activities.listActivities.BalanceListActivity;
+import amarnehsoft.com.debits.activities.listActivities.BanksListActivity;
 import amarnehsoft.com.debits.activities.listActivities.CurListActivity;
 import amarnehsoft.com.debits.activities.listActivities.ListActivity;
 import amarnehsoft.com.debits.activities.listActivities.PersonsActivity;
@@ -40,14 +41,12 @@ import amarnehsoft.com.debits.activities.listActivities.PersonsCatListActivity;
 import amarnehsoft.com.debits.activities.listActivities.ReminderListActivity;
 import amarnehsoft.com.debits.activities.listActivities.TransactionListActivity;
 import amarnehsoft.com.debits.beans.Cur;
-import amarnehsoft.com.debits.db.BalancesDB;
+import amarnehsoft.com.debits.db.BanksDB;
 import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.DBTools;
 import amarnehsoft.com.debits.db.PersonCatsDB;
 import amarnehsoft.com.debits.db.PersonsDB;
 import amarnehsoft.com.debits.db.TransactionsDB;
 import amarnehsoft.com.debits.fragments.dialogs.LanguagesDialogFragment;
-import amarnehsoft.com.debits.utils.AlarmUtils;
 import amarnehsoft.com.debits.utils.MyColors;
 import amarnehsoft.com.debits.utils.NumberUtils;
 
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG_BALANCES="balances";
     public static final String TAG_RECIEPTS_DATE="recieptDate";
     public static final String TAG_CUR = "cur";
+    private static final String TAG_BANKS="banks";
 
     private RecyclerView mRecyclerView;
     private Adapter mAdapter;
@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         DashboardItem balancesItem = new DashboardItem(TAG_BALANCES,getResources().getDrawable(R.drawable.bal),getString(R.string.theBalances));
 //        DashboardItem datesItem = new DashboardItem(TAG_RECIEPTS_DATE,getResources().getDrawable(R.drawable.ic_alarm_black_36dp),getString(R.string.recieptsDates));
         DashboardItem curItem = new DashboardItem(TAG_CUR,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.theCurs));
+        DashboardItem banksItem = new DashboardItem(TAG_BANKS,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.theBanks));
+
 
         int personsCount = PersonsDB.getInstance(this).getNoOfBeans();
         int catCount = PersonCatsDB.getInstance(this).getNoOfBeans();
@@ -97,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
         double debitsSum = TransactionsDB.getInstance(this).getSumOfTransaction(0);
         double paymentsSum = TransactionsDB.getInstance(this).getSumOfTransaction(1);
         double balanceSum = debitsSum - paymentsSum;
-        String balanceType= balanceSum>=0?getString(R.string.debits):getString(R.string.payments);
+        String balanceType= balanceSum>=0?getString(R.string.debits):getString(R.string.credits);
+        balanceSum = Math.abs(balanceSum);
         Cur cur = CurDB.getInstance(this).getDefualtBean();
         personsItem.setSummery( personsCount + " " + getString(R.string.persons));
         personsCatItem.setSummery( catCount+ " " + getString(R.string.cats));
@@ -105,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
         paymentsItem.setSummery( NumberUtils.Round(paymentsSum) + " " + cur.getName());
         balancesItem.setSummery( NumberUtils.Round(balanceSum) + " " + cur.getName() + " " + balanceType);
         curItem.setSummery( curCount + " " + getString(R.string.Curs));
-
+        int banksCount = BanksDB.getInstance(this).getNoOfBeans();
+        banksItem.setSummery(banksCount + " " + getString(R.string.banks));
 
         debitsItem.setLineColor(MyColors.debitColor);
         paymentsItem.setLineColor(MyColors.paymentColor);
@@ -121,12 +125,13 @@ public class MainActivity extends AppCompatActivity {
 //        result.add(datesItem);
         result.add(curItem);
         result.add(personsCatItem);
+        result.add(banksItem);
         return result;
     }
 
     private void setupRecyclerView(){
         int numberOfCols = getIntent().getIntExtra(ARG_NUM_OF_COLS,1);
-        final int [] spanArr = new int[]{2,1,1,2,1,1};
+        final int [] spanArr = new int[]{2,1,1,1,1,1,1};
         if(numberOfCols == 1)
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         else {
@@ -213,6 +218,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case TAG_CUR:
                     startActivity(CurListActivity.getIntent(MainActivity.this,1,ListActivity.MODE_VIEW));
+                    break;
+                case TAG_BANKS:
+                    startActivity(BanksListActivity.getIntent(MainActivity.this,1,ListActivity.MODE_VIEW));
                     break;
             }
         }

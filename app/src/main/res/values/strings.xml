@@ -229,4 +229,20 @@
     <string name="theCalculator">Calculator</string>
     <string name="theBalaceForThisPerson">The balance for this person is</string>
     <string name="credits">Credits</string>
+    <string name="upgradingDone">Upgrading Done</string>
+    <string name="bank">Bank</string>
+    <string name="addBank">Add Bank</string>
+    <string name="updateBank">Update Bank</string>
+    <string name="newBankHasBeenAddedSuccessfully">New Bank has been added successfully</string>
+    <string name="theBanks">Banks</string>
+    <string name="banks">Banks</string>
+    <string name="paymentMethod">Payment Method</string>
+    <string name="bankName">Bank name</string>
+    <string name="checkNum">Check number</string>
+    <string name="checkDate">Check Date</string>
+    <string name="theBankFieldIsNotValid">The bank field is not valid</string>
+    <string name="theCheckNumFieldIsNotValid">The check number field is not valid !</string>
+    <string name="cash">Cash</string>
+    <string name="check">Check</string>
+    <string name="creditCard">Credit Card</string>
 </resources>

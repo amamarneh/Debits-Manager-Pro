@@ -227,4 +227,20 @@
     <string name="theCalculator">الآلة الحاسبة</string>
     <string name="theBalaceForThisPerson">الرصيد لهذا الشخص هو </string>
     <string name="credits">مستحقات</string>
+    <string name="upgradingDone">تم تحديث النسخة</string>
+    <string name="bank">بنك</string>
+    <string name="addBank">إضافة بنك</string>
+    <string name="updateBank">تعديل بنك</string>
+    <string name="newBankHasBeenAddedSuccessfully">تم اضافة بنك جديد بنجاح</string>
+    <string name="theBanks">البنوك</string>
+    <string name="banks">بنوك</string>
+    <string name="paymentMethod">طريقة الدفع</string>
+    <string name="bankName">إسم البنك</string>
+    <string name="checkNum">رقم الشيك</string>
+    <string name="checkDate">تاريخ الشيك</string>
+    <string name="theBankFieldIsNotValid">اسم البنك غير صحيح !</string>
+    <string name="theCheckNumFieldIsNotValid">رقم الشيك غير صحيح !</string>
+    <string name="cash">نقداَ</string>
+    <string name="check">شيك</string>
+    <string name="creditCard">بطاقة إئتمان</string>
 </resources>

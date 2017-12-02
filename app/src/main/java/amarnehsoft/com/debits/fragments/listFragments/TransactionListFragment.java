@@ -19,6 +19,7 @@ import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.CustomTransaction;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Transaction;
+import amarnehsoft.com.debits.constants.PaymentMethod;
 import amarnehsoft.com.debits.db.CurDB;
 import amarnehsoft.com.debits.db.PersonsDB;
 import amarnehsoft.com.debits.db.TransactionsDB;
@@ -110,21 +111,6 @@ public class TransactionListFragment extends ListFragment  {
         UpdateRecyclerAndList();
     }
 
-//    private List<Transaction> getItems(String query){
-//        String personCode = getPersonCode();
-//        int type = getType();
-//        if (personCode != null){
-//            //show for the person
-//            return TransactionsDB.getInstance(getContext()).getTransactionsOfPerson(personCode,type);
-//        }else {
-//            //show for all persons
-//            if (query == null || query.length() == 0)
-//                return TransactionsDB.getInstance(getContext()).getAll(getType());
-//            else
-//                return TransactionsDB.getInstance(getContext()).getSearchQueryResult(getType(),query);
-//        }
-//    }
-
     private String getPersonCode(){
         return getArguments().getString(ARG_PERSON_CODE);
     }
@@ -136,8 +122,6 @@ public class TransactionListFragment extends ListFragment  {
 
 
     private void UpdateRecyclerAndList() {
-//        List<Transaction> list = TransactionsDB.getInstance(getContext()).getSearchQueryResultWithTools(getType(),mQuery,getPersonCode()
-//                ,FromDate,ToDate,OrderType,Orderd);
         List<CustomTransaction> transactions = TransactionsDB.getInstance(getContext()).getCustomTransactionsWithTools(getType(),mQuery,getPersonCode()
                 ,FromDate,ToDate,OrderType,Orderd);
         UpdateRecycler(transactions);
@@ -161,7 +145,7 @@ public class TransactionListFragment extends ListFragment  {
         public void bind(CustomTransaction item)
         {
             mItem = item;
-            dateTextView.setText(DateUtils.formatDate(mItem.getTransDate()));
+            dateTextView.setText(DateUtils.formatDate(mItem.getTransDate()) + " (" + PaymentMethod.get(mItem.getPaymentMethod()).getString(getContext()) + ")");
             priceTextView.setText(mItem.getAmount() + " " + mItem.getCurName());
 
             personTextView.setText(mItem.getPersonName());

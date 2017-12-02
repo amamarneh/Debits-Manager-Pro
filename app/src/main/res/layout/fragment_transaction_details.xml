@@ -33,44 +33,97 @@
             android:textColor="@android:color/holo_green_dark"
             android:textSize="25sp" />
 
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/shadow_oval"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/amount" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/amount_text_view"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/shadow_oval"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/amount" />
+
+                <TextView
+                    android:id="@+id/amount_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:text="154"
+                    android:textAlignment="center"
+                    android:textColor="@color/green_price"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cur_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nis"
+                    android:textAlignment="center"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtPaymentMethod"
+                android:text="@string/paymentMethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
-            android:text="154"
-            android:textAlignment="center"
-            android:textColor="@color/green_price"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtBank"
+                android:text="@string/bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/cur_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nis"
-            android:textAlignment="center"
-            android:textSize="13sp" />
+            <TextView
+                android:id="@+id/txtCheckNum"
+                android:text="@string/checkNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtCheckDate"
+                android:text="@string/checkDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
+
+
 
     <TextView
         android:layout_marginTop="10dp"

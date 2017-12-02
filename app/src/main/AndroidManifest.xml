@@ -30,6 +30,16 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
+        <activity
+            android:name=".activities.listActivities.BanksListActivity"
+            android:label="@string/theBanks"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+
         <activity
             android:name=".activities.listActivities.CurListActivity"
             android:label="@string/curs"
@@ -116,6 +126,11 @@
             android:name=".activities.entriesActivities.AddEditPeronCatActivity"
             android:label="@string/add_personCat"
             android:parentActivityName=".activities.listActivities.PersonsActivity"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name=".activities.entriesActivities.AddEditBankActivity"
+            android:label="@string/addBank"
+            android:parentActivityName=".activities.listActivities.BanksListActivity"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".activities.entriesActivities.AddEditTransactionActivity"

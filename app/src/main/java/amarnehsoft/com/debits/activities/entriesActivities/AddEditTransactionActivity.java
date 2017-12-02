@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,19 +33,23 @@ import java.util.UUID;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.CalculatorActivity;
+import amarnehsoft.com.debits.activities.listActivities.BanksListActivity;
 import amarnehsoft.com.debits.activities.listActivities.CurListActivity;
 import amarnehsoft.com.debits.activities.listActivities.ListActivity;
 import amarnehsoft.com.debits.activities.listActivities.PersonsActivity;
+import amarnehsoft.com.debits.beans.Bank;
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Transaction;
+import amarnehsoft.com.debits.constants.PaymentMethod;
 import amarnehsoft.com.debits.controllers.BalancesController;
 import amarnehsoft.com.debits.controllers.SPController;
-import amarnehsoft.com.debits.db.BalancesDB;
+import amarnehsoft.com.debits.db.BanksDB;
 import amarnehsoft.com.debits.db.CurDB;
 import amarnehsoft.com.debits.db.PersonsDB;
 import amarnehsoft.com.debits.db.TransactionsDB;
 import amarnehsoft.com.debits.fragments.dialogs.DatePickerFragment;
+import amarnehsoft.com.debits.popup.PaymentMethodPopup;
 import amarnehsoft.com.debits.utils.DateUtils;
 import amarnehsoft.com.debits.utils.Defualts;
 import amarnehsoft.com.debits.utils.MyColors;
@@ -55,21 +60,26 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
     public static final int REQ_SELECT_PERSON = 1;
     public static final int REQ_SELECT_CUR=2;
     public static final int REQ_CALCULATOR=3;
+    private static final int REQ_SELECT_BANK=4;
+    private static final int REQ_TRANS_DATE=5;
+    private static final int REQ_CHECK_DATE=6;
 
     private final int TYPE_DEBIT = 0;
     private final int TYPE_PAYMENT = 1;
 
-    private AutoCompleteTextView txtName;
-    private EditText txtAmount, txtNotes,txtCurEqu;
+    private AutoCompleteTextView txtName,txtBank;
+    private EditText txtAmount, txtNotes,txtCurEqu,txtCheckNum;
     private TextView txtBalance;
-    private Button txtCur,txtTransDate,btnSave,btnChoosePerson;
+    private Button txtCur,txtTransDate,btnSave,btnChoosePerson,btnCheckDate,btnPaymentMethod,btnChooseBank;
     private RadioButton meRadioBtn,onMeRadioBtn;
-    private View btnCalculator,balanceLayout;
+    private View btnCalculator,balanceLayout,checkLayout;
     private Transaction mBean;
     private Cur selectedCur;
-    private Date selectedTransDate;
+    private Date selectedTransDate,selectedCheckDate;
     private Person selectedPerson;
+    private Bank selectedBank;
     private int selectedType;
+    private PaymentMethod selectedPaymentMethod = PaymentMethod.CASH;
 //    private int mode;
 
     public static Intent getIntent(Context context, String transCode, @Nullable HashMap<String,Object> map){
@@ -92,6 +102,7 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
         }
 
         txtName = (AutoCompleteTextView) findViewById(R.id.txtName);
+        txtBank = (AutoCompleteTextView)findViewById(R.id.txtBank);
         setupAutoComplete();
         txtAmount = (EditText)findViewById(R.id.txtAmount);
         txtCur = (Button)findViewById(R.id.txtCur);
@@ -103,6 +114,13 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
         btnCalculator=findViewById(R.id.btnCalc);
         txtBalance = (TextView)findViewById(R.id.txtBalance);
         balanceLayout = findViewById(R.id.balanceLayout);
+        btnChooseBank = (Button)findViewById(R.id.btnChooseBank);
+        btnPaymentMethod = (Button)findViewById(R.id.btnPaymentMethod);
+        btnCheckDate = (Button)findViewById(R.id.txtCheckDate);
+        txtCheckNum = (EditText)findViewById(R.id.txtCheckNum);
+        checkLayout = findViewById(R.id.checkLayout);
+        btnSave = (Button)findViewById(R.id.btnSave);
+        btnChoosePerson = (Button)findViewById(R.id.btnChoosePerson);
 
         btnCalculator.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,11 +149,18 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
             }
         });
 
-        btnChoosePerson = (Button)findViewById(R.id.btnChoosePerson);
+
         btnChoosePerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(PersonsActivity.getIntent(AddEditTransactionActivity.this,1, ListActivity.MODE_SEARCH),REQ_SELECT_PERSON);
+            }
+        });
+
+        btnChooseBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(BanksListActivity.getIntent(AddEditTransactionActivity.this,1,ListActivity.MODE_SEARCH),REQ_SELECT_BANK);
             }
         });
 
@@ -145,12 +170,42 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
                 startActivityForResult(CurListActivity.getIntent(AddEditTransactionActivity.this,1,ListActivity.MODE_SEARCH),REQ_SELECT_CUR);
             }
         });
-        btnSave = (Button)findViewById(R.id.btnSave);
+
 
         txtTransDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment.newInstance(getCalendar(),0).show(getSupportFragmentManager(),"datePicker");
+                DatePickerFragment.newInstance(getCalendar(),REQ_TRANS_DATE).show(getSupportFragmentManager(),"datePicker");
+            }
+        });
+
+        btnCheckDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment.newInstance(getCalendar(),REQ_CHECK_DATE).show(getSupportFragmentManager(),"datePicker");
+            }
+        });
+
+        btnPaymentMethod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PaymentMethodPopup.IPaymentMethodPopup listener = new PaymentMethodPopup.IPaymentMethodPopup() {
+                    @Override
+                    public void setPaymentMethod(PaymentMethod paymentMethod) {
+                        selectedPaymentMethod = paymentMethod;
+                        btnPaymentMethod.setText(paymentMethod.getString(AddEditTransactionActivity.this));
+                        if (selectedPaymentMethod == PaymentMethod.CHECK){
+                            showCheckLayout();
+                            if (selectedCheckDate == null){
+                                selectedCheckDate = new Date();
+                                btnCheckDate.setText(getString(R.string.checkDate)+"\n"+formatDate(selectedCheckDate));
+                            }
+                        }else {
+                            hideCheckLayout();
+                        }
+                    }
+                };
+                new PaymentMethodPopup(AddEditTransactionActivity.this,v,listener).show();
             }
         });
 
@@ -161,6 +216,11 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
             if (selectedPerson != null) personName = selectedPerson.getName();
             txtName.setText(personName);
             selectedTransDate = mBean.getTransDate();
+
+            PaymentMethod method = PaymentMethod.get(mBean.getPaymentMethod());
+            if (method == null) method = PaymentMethod.CASH;
+            selectedPaymentMethod = method;
+
             txtTransDate.setText(getString(R.string.transactionDate) + "\n" + formatDate(selectedTransDate));
             txtNotes.setText(mBean.getNotes());
             selectedCur = CurDB.getInstance(this).getBeanById(mBean.getCurCode());
@@ -185,6 +245,16 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
             }else {
                 onMeRadioBtn.setChecked(true);
             }
+            if (selectedPaymentMethod == PaymentMethod.CHECK){
+                showCheckLayout();
+                selectedBank = BanksDB.getInstance(this).getBeanById(mBean.getBankCode());
+                String bankName = "";
+                if (selectedBank != null) bankName = selectedBank.getName();
+                txtBank.setText(bankName);
+                selectedCheckDate = mBean.getCheckDate();
+                btnCheckDate.setText(getString(R.string.checkDate) + "\n" + formatDate(selectedCheckDate));
+                txtCheckNum.setText(mBean.getCheckNum());
+            }
         }else{
             mMode = MODE_ADD;
             showCurEquLayout(false);
@@ -197,10 +267,13 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
             txtCur.setText(curName);
             selectedTransDate = new Date();
             txtTransDate.setText(getString(R.string.transactionDate) + "\n" +  formatDate(selectedTransDate));
+            selectedCheckDate = new Date();
+            btnCheckDate.setText(getString(R.string.checkDate) + "\n" + formatDate(selectedCheckDate));
             selectedType = 0;
             meRadioBtn.setChecked(true);
             HandlingMap();
         }
+        btnPaymentMethod.setText(selectedPaymentMethod.getString(this));
 
 
         btnSave = (Button)findViewById(R.id.btnSave);
@@ -213,6 +286,14 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
         //
         setupTitle(selectedType);
         //txtAmount.requestFocus();
+    }
+
+    private void showCheckLayout(){
+        checkLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void hideCheckLayout(){
+        checkLayout.setVisibility(View.GONE);
     }
 
     private void HandlingMap() {
@@ -273,16 +354,26 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
 
     private void setupAutoComplete(){
         txtName.setThreshold(1); //search from first char
+        txtBank.setThreshold(1);
         List<Person> persons = PersonsDB.getInstance(this).getAll(-1,null);
+        List<Bank> banks = BanksDB.getInstance(this).getAll();
         String[] arrPersons = new String[persons.size()];
+        String[] arrBanks = new String[banks.size()];
         for (int i=0 ; i<persons.size() ; i++){
             arrPersons[i] = persons.get(i).getName();
+        }
+        for (int i=0 ; i<banks.size() ; i++){
+            arrBanks[i] = banks.get(i).getName();
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.select_dialog_item, arrPersons);
 
+        ArrayAdapter<String> adapterBanks = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, arrBanks);
+
         txtName.setAdapter(adapter);
+        txtBank.setAdapter(adapterBanks);
 
         txtName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -349,6 +440,16 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
             txtAmount.setError(getString(R.string.amount_field_not_valid));
             return getString(R.string.amount_field_not_valid);
         }
+        if (selectedPaymentMethod == PaymentMethod.CHECK){
+            if (txtBank.getText().toString().replace(" ","").isEmpty()){
+                txtBank.setError(getString(R.string.theBankFieldIsNotValid));
+                return getString(R.string.theBankFieldIsNotValid);
+            }
+            if (txtCheckNum.getText().toString().trim().isEmpty()){
+                txtCheckNum.setError(getString(R.string.theCheckNumFieldIsNotValid));
+                return getString(R.string.theCheckNumFieldIsNotValid);
+            }
+        }
         return null;
     }
     private void TrySave(){
@@ -386,8 +487,22 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
     }
 
     private void save(Person person){
-
         Transaction bean = new Transaction();
+        if (selectedPaymentMethod == PaymentMethod.CHECK){
+            Bank bank = BanksDB.getInstance(this).getBeanByName(txtBank.getText().toString());
+            if (bank == null && !txtBank.getText().toString().isEmpty()){
+                bank = new Bank();
+                String code= UUID.randomUUID().toString();
+                bank.setCode(code);
+                bank.setName(txtBank.getText().toString());
+                BanksDB.getInstance(this).saveBean(bank);
+                selectedBank = bank;
+            }
+            bean.setBankCode(bank.getCode());
+            bean.setCheckNum(txtCheckNum.getText().toString());
+            bean.setCheckDate(selectedCheckDate);
+        }
+        bean.setPaymentMethod(selectedPaymentMethod.value());
         if (mMode == MODE_ADD){
             bean.setCode(UUID.randomUUID().toString());
         }else if (mMode == MODE_EDIT){
@@ -472,6 +587,14 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
                 double result = data.getDoubleExtra(CalculatorActivity.ARG_RESULT,0.0);
                 txtAmount.setText(result + "");
             }
+
+            if (requestCode == REQ_SELECT_BANK){
+                selectedBank = data.getParcelableExtra("data");
+                if (selectedBank != null)
+                    txtBank.setText(selectedBank.getName(),false);
+                txtCheckNum.requestFocus();
+                txtCheckNum.setFocusable(true);
+            }
         }
     }
 
@@ -482,8 +605,16 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
 
     @Override
     public void onDateSet(int reqCode,int year, int month, int day) {
-        selectedTransDate = DateUtils.getDate(year,month,day);
-        txtTransDate.setText(getString(R.string.transactionDate) + "\n" + formatDate(selectedTransDate));
+        switch (reqCode){
+            case REQ_TRANS_DATE:
+                selectedTransDate = DateUtils.getDate(year,month,day);
+                txtTransDate.setText(getString(R.string.transactionDate) + "\n" + formatDate(selectedTransDate));
+                break;
+            case REQ_CHECK_DATE:
+                selectedCheckDate = DateUtils.getDate(year,month,day);
+                btnCheckDate.setText(getString(R.string.checkDate) + "\n" + formatDate(selectedCheckDate));
+        }
+
     }
 
     @Override

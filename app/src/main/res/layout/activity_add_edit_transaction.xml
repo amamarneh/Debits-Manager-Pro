@@ -91,11 +91,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-
-
-
     </LinearLayout>
 
+    <Button
+        android:textSize="12sp"
+        android:layout_width="match_parent"
+        android:background="@drawable/button_layout2"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:id="@+id/btnPaymentMethod"
+        android:text="@string/paymentMethod"
+        android:textAllCaps="false"
+        android:layout_height="40dp"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -181,6 +188,90 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/checkLayout"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="3dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:background="@drawable/border_flat"
+                android:layout_marginStart="3dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:id="@+id/txtBank"
+                android:hint="@string/bankName"
+                android:inputType="textPersonName"
+                android:selectAllOnFocus="true"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:background="@drawable/button_layout2"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:id="@+id/btnChooseBank"
+                android:text="@string/choose"
+                android:textAllCaps="false"
+                android:layout_height="40dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border2"
+            android:gravity="center"
+            android:padding="3dp">
+
+            <EditText
+                android:layout_weight="1"
+                android:id="@+id/txtCheckNum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_flat"
+                android:hint="@string/checkNum"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:selectAllOnFocus="true"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border2"
+            android:gravity="center"
+            android:padding="3dp">
+
+            <Button
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:id="@+id/txtCheckDate"
+                android:text="Check Date: xx/xx/xxxx"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     <Button

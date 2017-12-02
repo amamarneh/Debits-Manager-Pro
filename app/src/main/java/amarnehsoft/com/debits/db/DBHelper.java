@@ -4,8 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
+import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.beans.PersonCat;
+import amarnehsoft.com.debits.db.tables.BanksTable;
 import amarnehsoft.com.debits.db.tables.CurTable;
 import amarnehsoft.com.debits.db.tables.PersonCatTable;
 import amarnehsoft.com.debits.db.tables.PersonTable;
@@ -23,7 +27,7 @@ public abstract class DBHelper<T> extends SQLiteOpenHelper
     protected Context mContext;
     private int mNumberOfItems = 100;
 
-    public static final int VERSION = 7;
+    public static final int VERSION = DBVersions.CURRENT_VERSION.value();
     public static final String DATABASE_NAME = "debits.db";
 
     protected DBHelper(Context context)
@@ -61,17 +65,29 @@ public abstract class DBHelper<T> extends SQLiteOpenHelper
         db.execSQL(CurTable._CREATE_TABLE);
         db.execSQL(TransactionsTable._CREATE_TABLE);
         db.execSQL(RemindersTable._CREATE_TABLE);
+        db.execSQL(BanksTable._CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        db.execSQL("DROP TABLE IF EXISTS " + PersonTable.TBL_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + PersonCatTable.TBL_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + CurTable.TBL_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + TransactionsTable.TBL_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + RemindersTable.TBL_NAME);
-        onCreate(db);
+        if (oldVersion < DBVersions.Versoin.VERSION_ADD_PAYMENT_METHOD_TO_TRANSACTIONS.value()){
+            String sql1 = "alter table " + TransactionsTable.TBL_NAME + " add column " + TransactionsTable.Cols.PAYMENT_METHOD + " integer default(0)";
+            String sql2 = "alter table " + TransactionsTable.TBL_NAME + " add column " + TransactionsTable.Cols.BANK_CODE + " varchar ";
+            String sql3 = "alter table " + TransactionsTable.TBL_NAME + " add column " + TransactionsTable.Cols.CHECK_NUM + " varchar ";
+            String sql4 = "alter table " + TransactionsTable.TBL_NAME + " add column " + TransactionsTable.Cols.CHECK_DATE + " integer ";
+            try {
+                db.execSQL(sql1);
+                db.execSQL(sql2);
+                db.execSQL(sql3);
+                db.execSQL(sql4);
+                db.execSQL(BanksTable._CREATE_TABLE);
+                Toast.makeText(mContext,mContext.getString(R.string.upgradingDone),Toast.LENGTH_LONG).show();
+            }catch (Exception e){
+                Log.e("Amarneh","exception>>>"+e.getMessage());
+                Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     public int getNoOfBeans(){
