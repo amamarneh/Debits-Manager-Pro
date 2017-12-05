@@ -17,7 +17,7 @@ public class CalculatorActivity extends AppCompatActivity {
     private static final String ARG_TITLE="title";
     private static final String ARG_QUERY="query";
 
-    private TextView txtTitle,txtQuery,txtResult;
+    private TextView txtQuery,txtResult;
     private Button btnClear,btnBackSpace,btnMul,btn1,btn2,btn3,btnDevide,btn4,btn5,btn6,btnPlus,btn7,btn8,btn9,btnMinus,btn0,btnDot,btnEqual,btnDone;
 
     public static Intent newIntent(Context context,String title,String query){
@@ -34,7 +34,6 @@ public class CalculatorActivity extends AppCompatActivity {
 
         CalculatorController.getInstance().clear();
 
-        txtTitle = (TextView)findViewById(R.id.txtTitle);
         txtQuery = (TextView)findViewById(R.id.txtQuery);
         txtResult = (TextView)findViewById(R.id.txtResult);
 
@@ -60,7 +59,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
         String title = getIntent().getStringExtra(ARG_TITLE);
         if (title == null) title = getString(R.string.theCalculator);
-        txtTitle.setText(title);
+
 
         String query = getIntent().getStringExtra(ARG_QUERY);
         if (query != null){
@@ -231,7 +230,7 @@ public class CalculatorActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("title",txtTitle.getText().toString());
+        outState.putString("title",getTitle().toString());
         outState.putString("query",txtQuery.getText().toString());
         outState.putString("result",txtResult.getText().toString());
     }
@@ -239,7 +238,7 @@ public class CalculatorActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        txtTitle.setText(savedInstanceState.getString("title"));
+        setTitle(savedInstanceState.getString("title"));
         txtQuery.setText(savedInstanceState.getString("query"));
         txtResult.setText(savedInstanceState.getString("result"));
     }
