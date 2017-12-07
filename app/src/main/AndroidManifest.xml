@@ -188,7 +188,7 @@
                 android:resource="@xml/simple_widget_info" />
         </receiver>
 
-        <activity android:name=".activities.CalculatorActivity"></activity>
+        <activity android:name=".activities.CalculatorActivity" android:label="@string/calculator" android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
