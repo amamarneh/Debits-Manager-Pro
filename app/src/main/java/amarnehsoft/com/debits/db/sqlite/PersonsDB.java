@@ -1,4 +1,4 @@
-package amarnehsoft.com.debits.db;
+package amarnehsoft.com.debits.db.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,36 +8,79 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import amarnehsoft.com.debits.beans.Bank;
-import amarnehsoft.com.debits.beans.PersonCat;
-import amarnehsoft.com.debits.db.tables.BanksTable;
-import amarnehsoft.com.debits.db.tables.PersonCatTable;
-import amarnehsoft.com.debits.utils.Defualts;
+import amarnehsoft.com.debits.beans.Person;
+import amarnehsoft.com.debits.db.tables.PersonTable;
+import amarnehsoft.com.debits.utils.ExcellUtils;
 
 /**
  * Created by Amarneh on 6/3/2017.
  */
 
-public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>{
+public class PersonsDB<B extends Person,T extends PersonTable> extends DBHelper<Person> {
 
-    private static BanksDB instance;
-    public static BanksDB getInstance(Context context){
+    private static PersonsDB instance;
+    public static PersonsDB getInstance(Context context){
         if(instance == null){
-            instance = new BanksDB(context);
+            instance = new PersonsDB(context);
         }
         return instance;
     }
 
-    private BanksDB(Context context) {
-        super(context,Bank.class);
+    protected PersonsDB(Context context) {
+        super(context,Person.class);
+    }
+    public int getNoOfPersonsForCat(String key){
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM " + T.TBL_NAME + " WHERE " + T.Cols.CAT_CODE + " = ?";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery(sql, new String[]{key});
+            if(cursor.moveToFirst())
+                count = cursor.getInt(0);
+
+        }finally {
+            if(cursor != null)
+                cursor.close();
+            db.close();
+        }
+        return count;
     }
 
-    public List<B> getAll()
+
+    public List<B> getAll(int isDeleted,String catCode)
     {
+
+        /*
+        isDeleted = -1 ==> getAllPersons
+         isDeleted = 0 ==> getNotDeletedPersons
+         isDeleted = 1 ==> getDeletedPersons
+        */
+
         SQLiteDatabase db = getReadableDatabase();
         List<B> list = new ArrayList<>();
         String selection=null;
         String[] args = null;
+        if(isDeleted==-1){
+            selection = null;
+            args = null;
+        }else if(isDeleted == 0){
+            selection = T.Cols.IS_DELETED+ "=?";
+            args = new String[]{"0"};
+        }else if(isDeleted == 1){
+            selection = T.Cols.IS_DELETED+ "=?";
+            args = new String[]{"1"};
+        }
+
+        if (catCode != null){
+            if (selection == null) {
+                selection = T.Cols.CAT_CODE+" =?";
+                args = new String[]{catCode};
+            }else {
+                selection = selection + " and "+ T.Cols.CAT_CODE+" =?";
+                args = new String[]{isDeleted+"",catCode};
+            }
+        }
 
         Cursor rs = null;
         try {
@@ -65,7 +108,7 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
         SQLiteDatabase db = getReadableDatabase();
         List<B> list = new ArrayList<>();
 
-        Cursor rs= null;
+        Cursor rs = null;
         try {
             rs = db.rawQuery("SELECT * FROM " + T.TBL_NAME +
                             " WHERE " + T.Cols.NAME + " LIKE '%" + query + "%' "
@@ -84,12 +127,18 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
             if (rs != null)
                 rs.close();
         }
+
         return list;
     }
 
     private void fillBeanFromCursor(Cursor rs, B bean) {
-        bean.setCode(rs.getString(rs.getColumnIndex(T.Cols.CODE)));
+        bean.setKey(rs.getString(rs.getColumnIndex(T.Cols.KEY)));
         bean.setName(rs.getString(rs.getColumnIndex(T.Cols.NAME)));
+        bean.setPhone(rs.getString(rs.getColumnIndex(T.Cols.PHONE)));
+        bean.setEmail(rs.getString(rs.getColumnIndex(T.Cols.EMAIL)));
+        bean.setIsDeleted(rs.getInt(rs.getColumnIndex(T.Cols.IS_DELETED)));
+        bean.setCatCode(rs.getString(rs.getColumnIndex(T.Cols.CAT_CODE)));
+        bean.setAddress(rs.getString(rs.getColumnIndex(T.Cols.ADDRESS)));
     }
 
     public int saveBean(B bean)
@@ -98,10 +147,10 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
         ContentValues values = new ContentValues();
         fillValuesFromBean(bean, values);
 
-        if(this.getBeanById(bean.getCode()) != null)
+        if(this.getBeanById(bean.getKey()) != null)
         {
-            db.update(T.TBL_NAME, values, T.Cols.CODE + " = ?",
-                    new String[]{bean.getCode()});
+            db.update(T.TBL_NAME, values, T.Cols.KEY + " = ?",
+                    new String[]{bean.getKey()});
         }
         else
             db.insert(T.TBL_NAME, null, values);
@@ -109,6 +158,7 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
         return 1;
     }
 
+    @Override
     public B getBeanById(String id)
     {
         SQLiteDatabase db = getReadableDatabase();
@@ -116,7 +166,7 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
         Cursor rs = null;
         try {
             rs = db.query(T.TBL_NAME, null
-                    , T.Cols.CODE + "=?", new String[]{id+""}, null, null, null);
+                    , T.Cols.KEY + "=?", new String[]{id+""}, null, null, null);
             if (rs.moveToFirst()) {
                 bean = (B)newBean();
                 fillBeanFromCursor(rs, bean);
@@ -125,7 +175,13 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
             if (rs != null)
                 rs.close();
         }
+
         return bean;
+    }
+
+    @Override
+    protected String getTableName() {
+        return T.TBL_NAME;
     }
 
     public B getBeanByName(String name)
@@ -135,7 +191,7 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
         Cursor rs = null;
         try {
             rs = db.query(T.TBL_NAME, null
-                    , T.Cols.NAME+ "=?", new String[]{name+""}, null, null, null);
+                    , T.Cols.NAME + "=?", new String[]{name+""}, null, null, null);
             if (rs.moveToFirst()) {
                 bean = (B)newBean();
                 fillBeanFromCursor(rs, bean);
@@ -146,18 +202,14 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
         }
         return bean;
     }
-    @Override
-    protected String getTableName() {
-        return T.TBL_NAME;
-    }
 
     public int updateBean(B bean)
     {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         fillValuesFromBean(bean, values);
-        db.update(T.TBL_NAME, values, T.Cols.CODE + " = ?",
-                new String[]{bean.getCode()});
+        db.update(T.TBL_NAME, values, T.Cols.KEY + " = ?",
+                new String[]{bean.getKey()});
 
         return 1;
     }
@@ -180,8 +232,13 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
     }
 
     private void fillValuesFromBean(B bean, ContentValues values) {
-        values.put(T.Cols.CODE, bean.getCode());
+        values.put(T.Cols.KEY, bean.getKey());
         values.put(T.Cols.NAME, bean.getName());
+        values.put(T.Cols.PHONE, bean.getPhone());
+        values.put(T.Cols.EMAIL, bean.getEmail());
+        values.put(T.Cols.IS_DELETED,bean.getIsDeleted());
+        values.put(T.Cols.CAT_CODE,bean.getCatCode());
+        values.put(T.Cols.ADDRESS,bean.getAddress());
     }
 
     public int deleteAll()
@@ -194,19 +251,30 @@ public class BanksDB<B extends Bank,T extends BanksTable> extends DBHelper<Bank>
     public boolean deleteBean(String key){
         B person = getBeanById(key);
         if(person != null){
-            //delete
-            String selection = T.Cols.CODE + " = ? ";
-            String[] selectionArgs = new String[]{key + ""};
-            SQLiteDatabase db = getWritableDatabase();
-            db.delete(T.TBL_NAME, selection, selectionArgs);
+            if (false){
+//            if(isPersonUsedInPayments(key)){
+//                //update the flag
+//                person.setIsDeleted(1);
+//                updateBean(person);
+//                return person;
+            }else {
+                //delete
+                String selection = T.Cols.KEY + " = ? ";
+                String[] selectionArgs = new String[]{key + ""};
+                SQLiteDatabase db = getWritableDatabase();
+                db.delete(T.TBL_NAME, selection, selectionArgs);
+            }
         }
         return person != null;
     }
 
     public void deleteList(List<B> list){
-        for (B bean : list){
-            deleteBean(bean.getCode());
+        for (B person : list){
+            deleteBean(person.getKey());
         }
     }
 
+    public boolean isPersonUsedInPayments(String personId){
+        return false;
+    }
 }

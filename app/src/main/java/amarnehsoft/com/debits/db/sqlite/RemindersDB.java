@@ -1,4 +1,4 @@
-package amarnehsoft.com.debits.db;
+package amarnehsoft.com.debits.db.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;

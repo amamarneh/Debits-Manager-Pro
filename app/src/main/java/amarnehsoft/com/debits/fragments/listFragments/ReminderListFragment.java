@@ -14,11 +14,9 @@ import amarnehsoft.com.debits.activities.itemDetailActivities.TransactionDetailA
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Reminder;
-import amarnehsoft.com.debits.beans.Transaction;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.RemindersDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.RemindersDB;
 import amarnehsoft.com.debits.utils.DateUtils;
 import amarnehsoft.com.debits.utils.MyColors;
 

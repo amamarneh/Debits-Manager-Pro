@@ -11,9 +11,7 @@ import java.util.UUID;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.beans.Bank;
-import amarnehsoft.com.debits.beans.PersonCat;
-import amarnehsoft.com.debits.db.BanksDB;
-import amarnehsoft.com.debits.db.PersonCatsDB;
+import amarnehsoft.com.debits.db.sqlite.BanksDB;
 
 public class AddEditBankActivity extends AddEditActivity {
 

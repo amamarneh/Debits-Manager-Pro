@@ -17,8 +17,8 @@ import amarnehsoft.com.debits.activities.listActivities.ListActivity;
 import amarnehsoft.com.debits.activities.listActivities.PersonsCatListActivity;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.PersonCat;
-import amarnehsoft.com.debits.db.PersonCatsDB;
-import amarnehsoft.com.debits.db.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonCatsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
 
 public class AddEditPeronActivity extends AddEditActivity {
 

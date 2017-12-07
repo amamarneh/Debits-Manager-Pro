@@ -245,4 +245,9 @@
     <string name="cash">Cash</string>
     <string name="check">Check</string>
     <string name="creditCard">Credit Card</string>
+    <string name="paymentReminder">Payment Reminder</string>
+    <string name="reminderFor">Reminder for</string>
+    <string name="reminder">Reminder</string>
+    <string name="sheet">Sheet</string>
+    <string name="exportToExcel">Export To Excel</string>
 </resources>

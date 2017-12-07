@@ -55,7 +55,6 @@ public class DateUtils {
 
     public static long getDiffDays(Date date1,Date date2) {
         //if date1 > date2 => positive , else => negative
-
         Calendar calendar1= Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();
 
@@ -66,5 +65,10 @@ public class DateUtils {
         long daysDiff = TimeUnit.MILLISECONDS.toDays(msDiff);
         Log.e("Amarneh","diffDays>>"+daysDiff);
         return daysDiff;
+    }
+
+    public static long getDiffInMilliSeconds(Date date1, Date date2){
+        //if date1 > date2 => positive , else => negative
+        return date1.getTime() - date2.getTime();
     }
 }

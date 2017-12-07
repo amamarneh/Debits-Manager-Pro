@@ -13,10 +13,7 @@ import java.util.UUID;
 import amarnehsoft.com.debits.beans.Balance;
 import amarnehsoft.com.debits.beans.CustomBalance;
 import amarnehsoft.com.debits.beans.Transaction;
-import amarnehsoft.com.debits.db.TransactionsDB;
-import amarnehsoft.com.debits.db.tables.PersonTable;
-import amarnehsoft.com.debits.db.tables.TransactionsTable;
-import amarnehsoft.com.debits.fragments.listFragments.ListFragment;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 
 /**
  * Created by jcc on 8/19/2017.

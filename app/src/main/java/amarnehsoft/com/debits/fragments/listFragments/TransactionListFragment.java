@@ -1,29 +1,18 @@
 package amarnehsoft.com.debits.fragments.listFragments;
 
-import android.app.DatePickerDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.itemDetailActivities.TransactionDetailActivity;
-import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.CustomTransaction;
-import amarnehsoft.com.debits.beans.Person;
-import amarnehsoft.com.debits.beans.Transaction;
 import amarnehsoft.com.debits.constants.PaymentMethod;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
-import amarnehsoft.com.debits.fragments.dialogs.DatePickerFragment;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 import amarnehsoft.com.debits.utils.DateUtils;
 import amarnehsoft.com.debits.utils.MyColors;
 
@@ -145,7 +134,11 @@ public class TransactionListFragment extends ListFragment  {
         public void bind(CustomTransaction item)
         {
             mItem = item;
-            dateTextView.setText(DateUtils.formatDate(mItem.getTransDate()) + " (" + PaymentMethod.get(mItem.getPaymentMethod()).getString(getContext()) + ")");
+            String paymentMethod ="";
+            if(mItem.getType() == 1){
+                paymentMethod =" (" + PaymentMethod.get(mItem.getPaymentMethod()).getString(getContext()) + ")";
+            }
+            dateTextView.setText(DateUtils.formatDate(mItem.getTransDate()) + paymentMethod);
             priceTextView.setText(mItem.getAmount() + " " + mItem.getCurName());
 
             personTextView.setText(mItem.getPersonName());

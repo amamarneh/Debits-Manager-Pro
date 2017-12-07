@@ -10,8 +10,7 @@ import android.widget.RemoteViews;
 import java.util.Random;
 
 import amarnehsoft.com.debits.R;
-import amarnehsoft.com.debits.beans.Transaction;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 
 /**
  * Created by jcc on 10/26/2017.

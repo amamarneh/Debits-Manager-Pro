@@ -10,6 +10,7 @@
     android:padding="5dp">
 
     <RadioGroup android:layout_width="match_parent"
+        android:visibility="gone"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
                 android:layout_height="wrap_content">
@@ -18,13 +19,13 @@
             android:layout_weight="1"
                      android:id="@+id/meRadioBtn"
                      android:checked="true"
-                     android:text="Debit"
+                     android:text="@string/debits"
                      android:layout_height="wrap_content"/>
 
         <RadioButton android:layout_width="wrap_content"
             android:layout_weight="1"
                      android:id="@+id/onMeRadioBtn"
-                     android:text="Payment"
+                     android:text="@string/payments"
                      android:layout_height="wrap_content"/>
 
     </RadioGroup>
@@ -42,7 +43,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:id="@+id/btnChoosePerson"
-            android:text="choose"
+            android:text="@string/choose"
             android:layout_height="40dp"/>
 
         <AutoCompleteTextView
@@ -74,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
 
-        android:text="NIS"
+        android:text="@string/currency"
         />
     <EditText
 
@@ -96,6 +97,7 @@
 
     <Button android:layout_width="match_parent"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:background="@drawable/button_layout2"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -118,7 +120,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:id="@+id/btnReminderDate"
-            android:text="Reminder Date\n15/11/2017"
+            android:text="Reminder Date\nxx/xx/xxxx"
             android:layout_height="wrap_content"/>
 
     <Button android:layout_width="match_parent"

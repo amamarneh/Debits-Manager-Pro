@@ -1,4 +1,4 @@
-package amarnehsoft.com.debits.db;
+package amarnehsoft.com.debits.db.sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.beans.PersonCat;
+import amarnehsoft.com.debits.db.DBVersions;
 import amarnehsoft.com.debits.db.tables.BanksTable;
 import amarnehsoft.com.debits.db.tables.CurTable;
 import amarnehsoft.com.debits.db.tables.PersonCatTable;

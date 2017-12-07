@@ -13,12 +13,8 @@ import amarnehsoft.com.debits.activities.itemDetailActivities.PersonDetailActivi
 import amarnehsoft.com.debits.beans.Balance;
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.CustomBalance;
-import amarnehsoft.com.debits.beans.Person;
-import amarnehsoft.com.debits.controllers.BalancesController;
-import amarnehsoft.com.debits.db.BalancesDB;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.fragments.dialogs.DatePickerFragment;
+import amarnehsoft.com.debits.db.sqlite.BalancesDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
 import amarnehsoft.com.debits.utils.MyColors;
 import amarnehsoft.com.debits.utils.NumberUtils;
 

@@ -13,10 +13,7 @@ import amarnehsoft.com.debits.activities.entriesActivities.AddEditTransactionAct
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.PersonCat;
 import amarnehsoft.com.debits.beans.Transaction;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonCatsDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 import amarnehsoft.com.debits.fragments.itemDetailsFragment.ItemDetailFragment;
 import amarnehsoft.com.debits.fragments.itemDetailsFragment.PersonCatDetailFragment;
 import amarnehsoft.com.debits.fragments.itemDetailsFragment.TransactionDetailFragment;

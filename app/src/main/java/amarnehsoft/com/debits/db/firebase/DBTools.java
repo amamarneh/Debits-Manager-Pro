@@ -1,4 +1,4 @@
-package amarnehsoft.com.debits.db;
+package amarnehsoft.com.debits.db.firebase;
 
 import android.app.Application;
 import android.app.ProgressDialog;
@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import amarnehsoft.com.debits.db.sqlite.DBHelper;
 import amarnehsoft.com.debits.interfaces.ITiger;
 import amarnehsoft.com.debits.utils.Alerts;
 import amarnehsoft.com.debits.utils.DateUtils;
@@ -93,7 +94,7 @@ public class DBTools {
                         Log.d("Amarneh","Exported!");
 
                         Map<String,Object> map = new HashMap<>();
-                        map.put("version",DBHelper.VERSION+"");
+                        map.put("version", DBHelper.VERSION+"");
                         map.put("id",taskSnapshot.getMetadata().getName());
                         map.put("date", ServerValue.TIMESTAMP);
 

@@ -16,8 +16,7 @@ import java.util.UUID;
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.PersonCat;
-import amarnehsoft.com.debits.db.PersonCatsDB;
-import amarnehsoft.com.debits.db.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonCatsDB;
 
 public class AddEditPeronCatActivity extends AddEditActivity {
 

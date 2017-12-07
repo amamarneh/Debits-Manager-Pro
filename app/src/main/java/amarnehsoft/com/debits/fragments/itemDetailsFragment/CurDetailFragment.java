@@ -10,11 +10,7 @@ import android.widget.TextView;
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.itemDetailActivities.ItemDetailActivity;
 import amarnehsoft.com.debits.beans.Cur;
-import amarnehsoft.com.debits.beans.Person;
-import amarnehsoft.com.debits.beans.Transaction;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
 
 public class CurDetailFragment extends ItemDetailFragment<Cur> {
 

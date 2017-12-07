@@ -15,8 +15,7 @@ import java.util.UUID;
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.PersonCat;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonCatsDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
 import amarnehsoft.com.debits.utils.NumberUtils;
 
 public class AddEditCurActivity extends AddEditActivity {

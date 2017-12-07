@@ -1,20 +1,14 @@
 package amarnehsoft.com.debits.activities.entriesActivities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -24,7 +18,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,10 +37,11 @@ import amarnehsoft.com.debits.beans.Transaction;
 import amarnehsoft.com.debits.constants.PaymentMethod;
 import amarnehsoft.com.debits.controllers.BalancesController;
 import amarnehsoft.com.debits.controllers.SPController;
-import amarnehsoft.com.debits.db.BanksDB;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.BanksDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
+import amarnehsoft.com.debits.fragments.dialogs.CreatePersonDialog;
 import amarnehsoft.com.debits.fragments.dialogs.DatePickerFragment;
 import amarnehsoft.com.debits.popup.PaymentMethodPopup;
 import amarnehsoft.com.debits.utils.DateUtils;
@@ -269,9 +263,12 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
             txtTransDate.setText(getString(R.string.transactionDate) + "\n" +  formatDate(selectedTransDate));
             selectedCheckDate = new Date();
             btnCheckDate.setText(getString(R.string.checkDate) + "\n" + formatDate(selectedCheckDate));
-            selectedType = 0;
+            selectedType = TYPE_DEBIT;
             meRadioBtn.setChecked(true);
             HandlingMap();
+            if (selectedType == TYPE_DEBIT){
+                btnPaymentMethod.setVisibility(View.GONE);
+            }
         }
         btnPaymentMethod.setText(selectedPaymentMethod.getString(this));
 
@@ -455,32 +452,12 @@ public class AddEditTransactionActivity extends AddEditActivity implements DateP
     private void TrySave(){
         Person person = PersonsDB.getInstance(this).getBeanByName(txtName.getText().toString().trim());
         if(person == null){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getString(R.string.unknounPerson))
-                    .setMessage(getString(R.string.thisPersonDoesntExistAddIt))
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Person person = new Person();
-                            person.setKey(UUID.randomUUID().toString());
-                            person.setName(txtName.getText().toString().trim());
-                            person.setPhone("");
-                            person.setEmail("");
-                            person.setCatCode(Defualts.DEFUALT);
-                            person.setIsDeleted(0);
-
-                            PersonsDB.getInstance(AddEditTransactionActivity.this).saveBean(person);
-
-                            save(person);
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // do nothing
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-
+            new CreatePersonDialog(this, txtName.getText().toString()) {
+                @Override
+                public void savedSuccessfully(Person person) {
+                    save(person);
+                }
+            }.show();
         }else{
             save(person);
         }

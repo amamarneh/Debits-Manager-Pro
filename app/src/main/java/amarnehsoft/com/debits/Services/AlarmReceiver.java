@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import amarnehsoft.com.debits.db.DBTools;
+import amarnehsoft.com.debits.db.firebase.DBTools;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -22,6 +22,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         String uid = sp.getString("uid",null);
         if(uid == null)
             return;
-        new DBTools(context,uid,DBTools.MODE_SILENCE).ExportDB();
+        new DBTools(context,uid, DBTools.MODE_SILENCE).ExportDB();
     }
 }

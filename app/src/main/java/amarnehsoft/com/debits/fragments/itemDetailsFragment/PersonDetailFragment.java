@@ -1,33 +1,21 @@
 package amarnehsoft.com.debits.fragments.itemDetailsFragment;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.itemDetailActivities.ItemDetailActivity;
 import amarnehsoft.com.debits.activities.listActivities.TransactionListActivity;
-import amarnehsoft.com.debits.beans.Balance;
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.controllers.BalancesController;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
-import amarnehsoft.com.debits.fragments.tabedFragments.TransactionsTabedFragment;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 import amarnehsoft.com.debits.utils.MyColors;
 import amarnehsoft.com.debits.utils.NumberUtils;
 

@@ -1,4 +1,4 @@
-package amarnehsoft.com.debits.db;
+package amarnehsoft.com.debits.db.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,13 +8,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
-import amarnehsoft.com.debits.beans.Cur;
-import amarnehsoft.com.debits.beans.CustomBalance;
 import amarnehsoft.com.debits.beans.CustomTransaction;
 import amarnehsoft.com.debits.beans.Transaction;
 import amarnehsoft.com.debits.db.tables.CurTable;
@@ -25,7 +21,7 @@ import amarnehsoft.com.debits.db.tables.TransactionsTable;
  * Created by Amarneh on 6/3/2017.
  */
 
-public class TransactionsDB<B extends Transaction,T extends TransactionsTable> extends DBHelper<Transaction>{
+public class TransactionsDB<B extends Transaction,T extends TransactionsTable> extends DBHelper<Transaction> {
 
     private static TransactionsDB instance;
     public static TransactionsDB getInstance(Context context){

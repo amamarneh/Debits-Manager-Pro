@@ -13,8 +13,7 @@ import java.util.List;
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.itemDetailActivities.PersonCatDetailActivity;
 import amarnehsoft.com.debits.beans.PersonCat;
-import amarnehsoft.com.debits.db.PersonCatsDB;
-import amarnehsoft.com.debits.db.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonCatsDB;
 
 import static android.app.Activity.RESULT_OK;
 

@@ -1,10 +1,9 @@
-package amarnehsoft.com.debits.db;
+package amarnehsoft.com.debits.db.sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;

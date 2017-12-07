@@ -4,7 +4,6 @@ package amarnehsoft.com.debits.activities;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,7 +30,6 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 
 import com.google.firebase.database.DatabaseReference;
@@ -39,13 +37,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.controllers.SPController;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.DBHelper;
-import amarnehsoft.com.debits.db.DBTools;
-import amarnehsoft.com.debits.db.PersonCatsDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.RemindersDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
+import amarnehsoft.com.debits.db.firebase.DBTools;
+import amarnehsoft.com.debits.db.sqlite.PersonCatsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.RemindersDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 import amarnehsoft.com.debits.utils.AlarmUtils;
 import amarnehsoft.com.debits.utils.Alerts;
 import amarnehsoft.com.debits.utils.DateUtils;

@@ -6,15 +6,12 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,11 +22,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import amarnehsoft.com.debits.Dummy;
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.Services.FloatingViewService;
 import amarnehsoft.com.debits.activities.listActivities.BalanceListActivity;
@@ -41,11 +36,11 @@ import amarnehsoft.com.debits.activities.listActivities.PersonsCatListActivity;
 import amarnehsoft.com.debits.activities.listActivities.ReminderListActivity;
 import amarnehsoft.com.debits.activities.listActivities.TransactionListActivity;
 import amarnehsoft.com.debits.beans.Cur;
-import amarnehsoft.com.debits.db.BanksDB;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonCatsDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.BanksDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
+import amarnehsoft.com.debits.db.sqlite.PersonCatsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 import amarnehsoft.com.debits.fragments.dialogs.LanguagesDialogFragment;
 import amarnehsoft.com.debits.utils.MyColors;
 import amarnehsoft.com.debits.utils.NumberUtils;
@@ -88,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         DashboardItem debitsItem = new DashboardItem(TAG_DEBTS,getResources().getDrawable(R.drawable.debits),getString(R.string.theDebits));
         DashboardItem paymentsItem = new DashboardItem(TAG_PAYMENTS,getResources().getDrawable(R.drawable.payments),getString(R.string.thePayments));
         DashboardItem balancesItem = new DashboardItem(TAG_BALANCES,getResources().getDrawable(R.drawable.bal),getString(R.string.theBalances));
-//        DashboardItem datesItem = new DashboardItem(TAG_RECIEPTS_DATE,getResources().getDrawable(R.drawable.ic_alarm_black_36dp),getString(R.string.recieptsDates));
+        DashboardItem datesItem = new DashboardItem(TAG_RECIEPTS_DATE,getResources().getDrawable(R.drawable.ic_alarm_black_36dp),getString(R.string.recieptsDates));
         DashboardItem curItem = new DashboardItem(TAG_CUR,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.theCurs));
         DashboardItem banksItem = new DashboardItem(TAG_BANKS,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.theBanks));
 
@@ -122,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         result.add(debitsItem);
         result.add(paymentsItem);
         result.add(personsItem);
-//        result.add(datesItem);
+        result.add(datesItem);
         result.add(curItem);
         result.add(personsCatItem);
         result.add(banksItem);
@@ -131,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecyclerView(){
         int numberOfCols = getIntent().getIntExtra(ARG_NUM_OF_COLS,1);
-        final int [] spanArr = new int[]{2,1,1,1,1,1,1};
+        final int [] spanArr = new int[]{2,1,1,1,1,1,1,1};
         if(numberOfCols == 1)
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         else {

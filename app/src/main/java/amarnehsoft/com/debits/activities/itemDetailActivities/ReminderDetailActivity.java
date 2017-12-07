@@ -2,22 +2,15 @@ package amarnehsoft.com.debits.activities.itemDetailActivities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.entriesActivities.AddEditReminderActivity;
-import amarnehsoft.com.debits.activities.entriesActivities.AddEditTransactionActivity;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Reminder;
-import amarnehsoft.com.debits.beans.Transaction;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.RemindersDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.RemindersDB;
 import amarnehsoft.com.debits.fragments.itemDetailsFragment.ItemDetailFragment;
 import amarnehsoft.com.debits.fragments.itemDetailsFragment.ReminderDetailFragment;
-import amarnehsoft.com.debits.fragments.itemDetailsFragment.TransactionDetailFragment;
 
 /**
  * Created by jcc on 6/3/2017.
@@ -49,7 +42,7 @@ public class ReminderDetailActivity extends ItemDetailActivity<Reminder,Reminder
         Person person = PersonsDB.getInstance(this).getBeanById(mBean.getPersonCode());
         String personName = getString(R.string.not_found);
         if (person != null) personName = person.getName();
-        String title= "reminder for [" + personName + "]";
+        String title= getString(R.string.reminder);
        return title;
     }
 
@@ -58,7 +51,7 @@ public class ReminderDetailActivity extends ItemDetailActivity<Reminder,Reminder
         Person person = PersonsDB.getInstance(this).getBeanById(mBean.getPersonCode());
         String personName = getString(R.string.not_found);
         if (person != null) personName = person.getName();
-        String title= "reminder for [" + personName + "]";
+        String title= getString(R.string.reminderFor) + " (" + personName + ")";
         mAppBarLayout.setTitle(title);
     }
 
@@ -82,9 +75,11 @@ public class ReminderDetailActivity extends ItemDetailActivity<Reminder,Reminder
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_EDIT){
             if (resultCode == RESULT_OK){
-                mBean = data.getParcelableExtra("data");
+                Reminder reminder = data.getParcelableExtra("data");
+                mBean = RemindersDB.getInstance(this).getBeanById(reminder.getCode());
                 refreshView();
                 setResult(RESULT_OK,data);
+                mFragment.refresh(mBean);
             }
         }
     }

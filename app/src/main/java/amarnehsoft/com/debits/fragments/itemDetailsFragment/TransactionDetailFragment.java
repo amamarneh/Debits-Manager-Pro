@@ -1,8 +1,6 @@
 package amarnehsoft.com.debits.fragments.itemDetailsFragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +11,12 @@ import amarnehsoft.com.debits.activities.itemDetailActivities.ItemDetailActivity
 import amarnehsoft.com.debits.beans.Bank;
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.Person;
-import amarnehsoft.com.debits.beans.PersonCat;
 import amarnehsoft.com.debits.beans.Transaction;
 import amarnehsoft.com.debits.constants.PaymentMethod;
-import amarnehsoft.com.debits.db.BanksDB;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonCatsDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
-import amarnehsoft.com.debits.fragments.listFragments.PersonsListFragment;
+import amarnehsoft.com.debits.db.sqlite.BanksDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 import amarnehsoft.com.debits.utils.DateUtils;
 import amarnehsoft.com.debits.utils.MyColors;
 
@@ -95,20 +90,27 @@ public class TransactionDetailFragment extends ItemDetailFragment<Transaction> {
         creationDate_text_view.setText(DateUtils.formatDate( mItem.getCreationDate()));
         notes_text_view.setText(mItem.getNotes());
 
-        PaymentMethod method = PaymentMethod.get(mItem.getPaymentMethod());
-        txtPaymentType.setText(method.getString(getContext()));
-        if (method == PaymentMethod.CHECK){
-            String bankName ="";
-            Bank bank = BanksDB.getInstance(getContext()).getBeanById(mItem.getBankCode());
-            if (bank != null) bankName = bank.getName();
-            txtBankName.setText(bankName);
-            txtCheckNum.setText(mItem.getCheckNum());
-            txtCheckDate.setText(DateUtils.formatDateWithoutTime(mItem.getCheckDate()));
+        if (mItem.getType() == 1){
+            PaymentMethod method = PaymentMethod.get(mItem.getPaymentMethod());
+            txtPaymentType.setText(method.getString(getContext()));
+            if (method == PaymentMethod.CHECK){
+                String bankName ="";
+                Bank bank = BanksDB.getInstance(getContext()).getBeanById(mItem.getBankCode());
+                if (bank != null) bankName = bank.getName();
+                txtBankName.setText(bankName);
+                txtCheckNum.setText(mItem.getCheckNum());
+                txtCheckDate.setText(DateUtils.formatDateWithoutTime(mItem.getCheckDate()));
 
-            txtBankName.setVisibility(View.VISIBLE);
-            txtCheckDate.setVisibility(View.VISIBLE);
-            txtCheckNum.setVisibility(View.VISIBLE);
+                txtBankName.setVisibility(View.VISIBLE);
+                txtCheckDate.setVisibility(View.VISIBLE);
+                txtCheckNum.setVisibility(View.VISIBLE);
+            }else {
+                txtBankName.setVisibility(View.GONE);
+                txtCheckNum.setVisibility(View.GONE);
+                txtCheckDate.setVisibility(View.GONE);
+            }
         }else {
+            txtPaymentType.setVisibility(View.GONE);
             txtBankName.setVisibility(View.GONE);
             txtCheckNum.setVisibility(View.GONE);
             txtCheckDate.setVisibility(View.GONE);

@@ -12,7 +12,7 @@ import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.entriesActivities.AddEditTransactionActivity;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Transaction;
-import amarnehsoft.com.debits.db.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
 import amarnehsoft.com.debits.fragments.listFragments.TransactionListFragment;
 import amarnehsoft.com.debits.fragments.tabedFragments.TransactionsTabedFragment;
 

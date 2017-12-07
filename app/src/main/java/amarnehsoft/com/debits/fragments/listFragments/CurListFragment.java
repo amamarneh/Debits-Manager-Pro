@@ -12,7 +12,7 @@ import java.util.List;
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.itemDetailActivities.CurDetailActivity;
 import amarnehsoft.com.debits.beans.Cur;
-import amarnehsoft.com.debits.db.CurDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
 
 /**
  * Created by jcc on 8/18/2017.

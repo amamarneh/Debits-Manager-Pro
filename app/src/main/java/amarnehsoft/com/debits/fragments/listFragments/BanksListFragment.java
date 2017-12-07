@@ -10,11 +10,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import amarnehsoft.com.debits.R;
-import amarnehsoft.com.debits.activities.itemDetailActivities.PersonCatDetailActivity;
 import amarnehsoft.com.debits.beans.Bank;
-import amarnehsoft.com.debits.beans.PersonCat;
-import amarnehsoft.com.debits.db.BanksDB;
-import amarnehsoft.com.debits.db.PersonCatsDB;
+import amarnehsoft.com.debits.db.sqlite.BanksDB;
 
 /**
  * Created by jcc on 8/18/2017.

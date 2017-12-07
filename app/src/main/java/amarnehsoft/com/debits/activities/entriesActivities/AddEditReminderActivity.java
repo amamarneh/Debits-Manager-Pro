@@ -4,7 +4,6 @@ import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,14 +25,13 @@ import amarnehsoft.com.debits.activities.listActivities.PersonsActivity;
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Reminder;
-import amarnehsoft.com.debits.beans.Transaction;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.RemindersDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.constants.TransactionType;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.RemindersDB;
+import amarnehsoft.com.debits.fragments.dialogs.CreatePersonDialog;
 import amarnehsoft.com.debits.fragments.dialogs.DatePickerFragment;
 import amarnehsoft.com.debits.utils.DateUtils;
-import amarnehsoft.com.debits.utils.Defualts;
 import amarnehsoft.com.debits.utils.NotificationUtils;
 import amarnehsoft.com.debits.utils.NumberUtils;
 import amarnehsoft.com.debits.utils.ReminderContentBuilder;
@@ -77,6 +75,7 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
         if (code != null){
             mBean = RemindersDB.getInstance(this).getBeanById(code);
         }
+        selectedType = TransactionType.PAYMENT.value();
 
         txtName = (AutoCompleteTextView) findViewById(R.id.txtName);
         setupAutoComplete();
@@ -170,7 +169,6 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
             selectedReminderDate = new Date();
             txtTransDate.setText(getString(R.string.transactionDate) + "\n" +  formatDate(selectedTransDate));
             btnReminderDate.setText(getString(R.string.reminderDate)  + "\n" + formatDate(selectedReminderDate));
-            selectedType = 0;
             meRadioBtn.setChecked(true);
         }
 
@@ -232,15 +230,15 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
     }
 
     private String formatDate(Date date){
-        return DateUtils.formatDateWithoutTime(date);
+        return DateUtils.formatDate(date);
     }
 
     private void saveCommand(){
         String validation = validate();
         if (validation == null){
-            save();
+            trySave(txtName.getText().toString());
         }else {
-//            showError(validation);
+            showError(validation);
         }
     }
 
@@ -261,9 +259,7 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
         return null;
     }
 
-    private void save(){
-        selectedPerson = savePersonIfNotExist(txtName.getText().toString()); //if not exist
-
+    private void save(Person person){
         Reminder bean = new Reminder();
         if (mMode == MODE_ADD){
             bean.setCode(UUID.randomUUID().toString());
@@ -272,7 +268,7 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
         }
 
         String personCode = null;
-        if (selectedPerson != null) personCode = selectedPerson.getKey();
+        if (person != null) personCode = person.getKey();
         bean.setPersonCode(personCode);
         bean.setNotes(txtNotes.getText().toString());
         String curCode = null;
@@ -285,17 +281,16 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
         bean.setReminerDate(selectedReminderDate);
 
         RemindersDB.getInstance(this).saveBean(bean);
-        Notification notification = NotificationUtils.getNotification(this, ReminderContentBuilder.buildTitle(bean),ReminderContentBuilder.buildContent(bean));
-        long ms = (1000*DateUtils.getDiffDays(bean.getReminerDate(),new Date()));
-//        long ms = 1000;
+        Notification notification = NotificationUtils.getNotification(this, ReminderContentBuilder.buildTitle(this,bean),ReminderContentBuilder.buildContent(this,bean));
+        long ms = DateUtils.getDiffInMilliSeconds(bean.getReminerDate(),new Date());
         NotificationUtils.scheduleNotification(this,notification,ms,1);
-        Notification notification2 = NotificationUtils.getNotification(this,"title2","content2");
-        NotificationUtils.scheduleNotification(this,notification2,2000,2);
 
         Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("data",bean);
-        intent.putExtras(bundle);
+        intent.putExtra("data",bean);
+        Log.e("Amarneh","bean.getAmount="+bean.getAmount());
+        //Bundle bundle = new Bundle();
+        //bundle.putParcelable("data",bean);
+        //intent.putExtras(bundle);
         setResult(RESULT_OK,intent);
 
         finish();
@@ -305,19 +300,18 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
         ShowSnackbar(error);
     }
 
-    private Person savePersonIfNotExist(String personName){
-        Person person = PersonsDB.getInstance(this).getBeanByName(personName);
+    private void trySave(String personName){
+        final Person person = PersonsDB.getInstance(this).getBeanByName(personName);
         if (person == null){
-            person = new Person();
-            person.setKey(UUID.randomUUID().toString());
-            person.setName(personName);
-            person.setPhone("");
-            person.setEmail("");
-            person.setCatCode(Defualts.DEFUALT);
-            person.setIsDeleted(0);
-            PersonsDB.getInstance(this).saveBean(person);
+            new CreatePersonDialog(this, personName) {
+                @Override
+                public void savedSuccessfully(Person person2) {
+                    save(person2);
+                }
+            }.show();
+        }else {
+            save(person);
         }
-        return person;
     }
 
     @Override

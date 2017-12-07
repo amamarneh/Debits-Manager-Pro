@@ -15,11 +15,11 @@ import amarnehsoft.com.debits.beans.PersonCat;
 import amarnehsoft.com.debits.beans.Reminder;
 import amarnehsoft.com.debits.beans.Transaction;
 import amarnehsoft.com.debits.controllers.BalancesController;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.PersonCatsDB;
-import amarnehsoft.com.debits.db.PersonsDB;
-import amarnehsoft.com.debits.db.RemindersDB;
-import amarnehsoft.com.debits.db.TransactionsDB;
+import amarnehsoft.com.debits.db.sqlite.CurDB;
+import amarnehsoft.com.debits.db.sqlite.PersonCatsDB;
+import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.RemindersDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 
 /**
  * Created by jcc on 8/18/2017.

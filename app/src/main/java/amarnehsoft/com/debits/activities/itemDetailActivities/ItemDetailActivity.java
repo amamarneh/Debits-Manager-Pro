@@ -18,11 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import amarnehsoft.com.debits.R;
-import amarnehsoft.com.debits.activities.MainActivity;
-import amarnehsoft.com.debits.beans.Person;
-import amarnehsoft.com.debits.db.CurDB;
-import amarnehsoft.com.debits.db.DBHelper;
-import amarnehsoft.com.debits.db.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.DBHelper;
 import amarnehsoft.com.debits.fragments.itemDetailsFragment.ItemDetailFragment;
 
 public abstract class ItemDetailActivity<B,T extends DBHelper> extends AppCompatActivity {
