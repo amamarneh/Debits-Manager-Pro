@@ -17,4 +17,5 @@
     <color name="debitColor">#ff5252</color>
     <color name="paymentColor">#5daf48</color>
     <color name="calculator_btn">#ffffff</color>
+    <color name="calculator_text">#686868</color>
 </resources>
