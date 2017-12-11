@@ -2,10 +2,12 @@ package amarnehsoft.com.debits.activities.listActivities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import amarnehsoft.com.debits.R;
@@ -13,6 +15,7 @@ import amarnehsoft.com.debits.activities.entriesActivities.AddEditTransactionAct
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Transaction;
 import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.fragments.dialogs.GenerateExcelDialogFragment;
 import amarnehsoft.com.debits.fragments.listFragments.TransactionListFragment;
 import amarnehsoft.com.debits.fragments.tabedFragments.TransactionsTabedFragment;
 
@@ -22,8 +25,7 @@ import amarnehsoft.com.debits.fragments.tabedFragments.TransactionsTabedFragment
 
 public class TransactionListActivity extends ListActivity {
 
-//    public static final String ARG_SELECTED_TAB="selectedTab";
-        public static final String ARG_TYPE="type";
+    public static final String ARG_TYPE="type";
     public static final String ARG_PERSON_CODE="personCode";
 
     public static Intent getIntent(Context ctx,int numberOfCols,int type,String personCode){
@@ -52,13 +54,8 @@ public class TransactionListActivity extends ListActivity {
             setTitle(getString(R.string.debits));
         else
             setTitle(getString(R.string.debits_and_payments));
-//        return TransactionsTabedFragment.newInstance(getSelectedTab(),null);
         return TransactionListFragment.newInstance(1,getType(),getPersonCode());
     }
-
-//    private int getSelectedTab(){
-//        return getIntent().getIntExtra(ARG_SELECTED_TAB,0);
-//    }
 
     private int getType(){
         return getIntent().getIntExtra(ARG_TYPE,-1);
@@ -78,10 +75,21 @@ public class TransactionListActivity extends ListActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_ADD){
             if (resultCode== RESULT_OK){
-                //Transaction bean = data.getParcelableExtra("data");
                 mFragment.setupRecyclerView();
                 ShowSnackbar(getString(R.string.newTransactionAddedSuccessfully));
             }
         }
+    }
+
+    @Override
+    protected boolean showExcelIcon() {
+        return true;
+    }
+
+    @Override
+    protected void onExcelIconClicked() {
+        super.onExcelIconClicked();
+        GenerateExcelDialogFragment.newInstance((ArrayList<Parcelable>) mFragment.getAdapter().getList(),getString(R.string.transactions))
+                .show(getSupportFragmentManager(),GenerateExcelDialogFragment.TAG);
     }
 }

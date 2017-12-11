@@ -70,15 +70,11 @@ public class TransactionListFragment extends ListFragment  {
         UpdateRecyclerAndList();
     }
 
-    private Adapter mAdapter;
-
     @Override
     public void setupRecyclerView(){
-//        List<CustomTransaction> list = getItems(mQuery);
-//
-//        UpdateRecycler(list);
         UpdateRecyclerAndList();
     }
+
     public void UpdateRecycler(List<CustomTransaction> list){
         if (mAdapter == null)
         {
@@ -148,9 +144,6 @@ public class TransactionListFragment extends ListFragment  {
             else
                 priceTextView.setTextColor(MyColors.paymentColor);
 
-//            Cur cur = CurDB.getInstance(getContext()).getBeanById(mItem.getCurCode());
-//            String curName = getString(R.string.not_found);
-//            if (cur != null) curName = cur.getName();
             curTextView.setText("");
         }
 

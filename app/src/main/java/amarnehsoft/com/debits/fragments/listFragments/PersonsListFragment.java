@@ -36,8 +36,6 @@ public class PersonsListFragment extends ListFragment {
         return fragment;
     }
 
-    private Adapter mAdapter;
-
     @Override
     public void setupRecyclerView(){
         List<Person> list = getItems(mQuery);

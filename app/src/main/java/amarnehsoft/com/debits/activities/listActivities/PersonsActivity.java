@@ -2,13 +2,17 @@ package amarnehsoft.com.debits.activities.listActivities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.entriesActivities.AddEditPeronActivity;
 import amarnehsoft.com.debits.beans.Person;
+import amarnehsoft.com.debits.fragments.dialogs.GenerateExcelDialogFragment;
 import amarnehsoft.com.debits.fragments.listFragments.PersonsListFragment;
 
 /**
@@ -51,5 +55,17 @@ public class PersonsActivity extends ListActivity {
                 super.ShowSnackbar(getString(R.string.newPersonHasBeenAddedSuccessfully) + " ( " + person.getName() + " )");
             }
         }
+    }
+
+    @Override
+    protected boolean showExcelIcon() {
+        return true;
+    }
+
+    @Override
+    protected void onExcelIconClicked() {
+        super.onExcelIconClicked();
+        GenerateExcelDialogFragment.newInstance((ArrayList<Parcelable>) mFragment.getAdapter().getList(),getString(R.string.persons))
+        .show(getSupportFragmentManager(),GenerateExcelDialogFragment.TAG);
     }
 }

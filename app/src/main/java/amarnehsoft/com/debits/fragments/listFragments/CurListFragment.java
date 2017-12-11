@@ -30,8 +30,6 @@ public class CurListFragment extends ListFragment {
         return fragment;
     }
 
-    private Adapter mAdapter;
-
     @Override
     public void setupRecyclerView(){
         List<Cur> list = getItems(mQuery);

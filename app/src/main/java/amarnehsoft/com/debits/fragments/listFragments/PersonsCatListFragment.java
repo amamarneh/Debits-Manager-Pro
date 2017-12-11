@@ -36,8 +36,6 @@ PersonsCatListFragment extends ListFragment {
         return fragment;
     }
 
-    private Adapter mAdapter;
-
     @Override
     public void setupRecyclerView(){
         List<PersonCat> list = getItems(mQuery);

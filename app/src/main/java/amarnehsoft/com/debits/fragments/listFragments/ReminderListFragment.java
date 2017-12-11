@@ -39,8 +39,6 @@ public class ReminderListFragment extends ListFragment {
         return fragment;
     }
 
-    private Adapter mAdapter;
-
     @Override
     public void setupRecyclerView(){
         List<Reminder> list = getItems(mQuery);

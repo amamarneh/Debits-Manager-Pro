@@ -29,8 +29,6 @@ public class BanksListFragment extends ListFragment {
         return fragment;
     }
 
-    private Adapter mAdapter;
-
     @Override
     public void setupRecyclerView(){
         List<Bank> list = getItems(mQuery);

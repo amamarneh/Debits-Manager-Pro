@@ -37,8 +37,6 @@ public class BalanceListFragment extends ListFragment {
         return fragment;
     }
 
-    private Adapter mAdapter;
-
     @Override
     public void setupRecyclerView(){
         List<CustomBalance> list = getItems(OrderType,mQuery,Ordered);

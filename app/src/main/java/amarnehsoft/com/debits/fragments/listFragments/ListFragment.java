@@ -60,6 +60,12 @@ public abstract class ListFragment extends Fragment implements DatePickerFragmen
     private long FromDate = 0;
     private long ToDate = 0;
 
+    protected Adapter mAdapter;
+
+    public Adapter getAdapter(){
+        return mAdapter;
+    }
+
     public ListFragment() {
     }
 
@@ -299,6 +305,9 @@ public abstract class ListFragment extends Fragment implements DatePickerFragmen
         }
         public void setList(List<T> items){
             mItems=items;
+        }
+        public List<T> getList(){
+            return mItems;
         }
 
         public void clear(){

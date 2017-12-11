@@ -3,6 +3,7 @@ package amarnehsoft.com.debits.excell;
 
 import android.content.Context;
 import android.os.Environment;
+import android.os.Parcelable;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +23,7 @@ import jxl.write.biff.RowsExceededException;
  * Created by jcc on 12/5/2017.
  */
 
-public abstract class ExcelHelper<T,C extends ExcelHelper> {
+public abstract class ExcelHelper<T extends Parcelable,C extends ExcelHelper> {
     //T : bean,C : Child
     //C -> we dont need it till now
     public static final String FOLDER_NAME="/debitsMangerPro.Excel";
@@ -56,7 +57,7 @@ public abstract class ExcelHelper<T,C extends ExcelHelper> {
         return (C)this;
     }
 
-    public void generate(List<T> list){
+    public boolean generate(List<T> list){
         if (fileName == null){
             fileName =defaultFileName();
         }
@@ -106,7 +107,9 @@ public abstract class ExcelHelper<T,C extends ExcelHelper> {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     protected void writeContentToSheet(WritableSheet sheet,List<T> list) {

@@ -19,10 +19,11 @@ import android.widget.RelativeLayout;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.beans.PersonCat;
+import amarnehsoft.com.debits.fragments.dialogs.GenerateExcelDialogFragment;
 import amarnehsoft.com.debits.fragments.listFragments.ListFragment;
 import amarnehsoft.com.debits.interfaces.SearchViewExpandListener;
 
-public abstract class ListActivity extends AppCompatActivity {
+public abstract class ListActivity extends AppCompatActivity implements GenerateExcelDialogFragment.OnFragmentInteractionListener{
 
     public static final String ARG_NUMBER_OF_COLS = "numberOfCols";
     public static final String ARG_MODE = "mode";
@@ -70,7 +71,10 @@ public abstract class ListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
+        if (showExcelIcon())
+            inflater.inflate(R.menu.options_menu, menu);
+        else
+            inflater.inflate(R.menu.search_menu,menu);
 
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
@@ -96,6 +100,20 @@ public abstract class ListActivity extends AppCompatActivity {
         return true;
     }
 
+    protected  boolean showExcelIcon(){
+        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.exportToExcel){
+            onExcelIconClicked();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected void onExcelIconClicked(){}
+
     protected int getNumberOfCols(){
         int numberOfCols = getIntent().getIntExtra(ARG_NUMBER_OF_COLS,1);
         if (numberOfCols > 0){
@@ -111,6 +129,16 @@ public abstract class ListActivity extends AppCompatActivity {
 
     protected void onQueryTextSubmited(String query){
         //you should override it if you want to use it .
+    }
+
+    @Override
+    public void exportedToExcelSuccessfully() {
+        Snackbar.make(mFragment.getView(),getString(R.string.exportedToExcelSuccessfully),Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void errorWhileExportingToExcel() {
+        Snackbar.make(mFragment.getView(),getString(R.string.errorWhileExportingToExcel),Snackbar.LENGTH_SHORT).show();
     }
 
     public abstract void onFabClicked();
