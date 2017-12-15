@@ -6,47 +6,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="amarnehsoft.com.debits.fragments.listFragments.ListFragment">
-    <LinearLayout
 
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:background="@drawable/border2"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/orderbyTextView"
                 android:text="@string/orderBy"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content" />
 
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:id="@+id/orderbydateBtn"
                 android:text="@string/date"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content" />
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:id="@+id/orderbynameBtn"
                 android:text="@string/name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content" />
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:id="@+id/orderbypriceBtn"
                 android:text="@string/price"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content" />
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:id="@+id/moreBtn"
                 android:text="..."
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+
         <LinearLayout
             android:visibility="gone"
             android:id="@+id/datesearchLayout"
@@ -126,9 +134,12 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
                                             android:id="@+id/recyclerView"
                                             android:layout_height="match_parent"
                                             />
+
 </LinearLayout>

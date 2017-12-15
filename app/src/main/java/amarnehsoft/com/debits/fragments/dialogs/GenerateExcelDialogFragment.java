@@ -37,7 +37,7 @@ public class GenerateExcelDialogFragment extends DialogFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public static DialogFragment newInstance(ArrayList<Parcelable> list, String defaultFileName){
+    public static DialogFragment newInstance(ArrayList list, String defaultFileName){
         DialogFragment fragment = new GenerateExcelDialogFragment();
         Bundle args = new Bundle();
         args.putString(ARG_FILE_NAME,defaultFileName);
@@ -50,7 +50,7 @@ public class GenerateExcelDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dialog_generate_excel, container, false);
-        TextInputEditText txtFileName = (TextInputEditText)v.findViewById(R.id.txtFileName);
+        final TextInputEditText txtFileName = (TextInputEditText)v.findViewById(R.id.txtFileName);
         Button btnGenerate = (Button)v.findViewById(R.id.btnGenerate);
         TextView txtFolderName = (TextView)v.findViewById(R.id.txtFolderName);
 
@@ -61,7 +61,6 @@ public class GenerateExcelDialogFragment extends DialogFragment {
         txtFileName.setText(defaultFileName);
 
         final List list = getArguments().getParcelableArrayList(ARG_LIST);
-        final String finalDefaultFileName = defaultFileName;
         btnGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +69,7 @@ public class GenerateExcelDialogFragment extends DialogFragment {
                 }else {
                     Object bean = list.get(0);
                     if (bean instanceof Person){
-                        if(new PersonsExcel(getContext()).setFileName(finalDefaultFileName).generate((List<Person>)list)){
+                        if(new PersonsExcel(getContext()).setFileName(txtFileName.getText().toString()).generate((List<Person>)list)){
                             mListener.exportedToExcelSuccessfully();
                         }else {
                             mListener.errorWhileExportingToExcel();
@@ -78,7 +77,7 @@ public class GenerateExcelDialogFragment extends DialogFragment {
                         dismiss();
                     }else if(bean instanceof Transaction){
                         int type = ((Transaction) bean).getType();
-                        if (new TransactionsExcel(getContext(),type).setFileName(finalDefaultFileName).generate((List<Transaction>)list)){
+                        if (new TransactionsExcel(getContext(),type).setFileName(txtFileName.getText().toString()).generate((List<Transaction>)list)){
                             mListener.exportedToExcelSuccessfully();
                         }else {
                             mListener.errorWhileExportingToExcel();

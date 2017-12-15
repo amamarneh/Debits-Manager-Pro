@@ -243,4 +243,23 @@
     <string name="cash">نقداَ</string>
     <string name="check">شيك</string>
     <string name="creditCard">بطاقة إئتمان</string>
+    <string name="paymentReminder">منبه الدفعات</string>
+    <string name="reminderFor">تنبيه لـ</string>
+    <string name="reminder">منبه</string>
+    <string name="sheet">صفحة</string>
+    <string name="exportToExcel">تصدير الى اكسل</string>
+    <string name="fileName">اسم الملف</string>
+    <string name="generate">إنشاء</string>
+    <string name="no_data_to_generate">لا يوجد بيانات للانشاء</string>
+    <string name="transactions">الحركات</string>
+    <string name="thePersonsWasExportedSuccessfully">تم انشاء الاشخاص بنجاح</string>
+    <string name="errorWhileGeneratingPersons">خطأ اثناء إنشاء الاشخاص</string>
+    <string name="theTransactionsWasExportedSuccessfully">تم انشاء الحركات بنجاح</string>
+    <string name="errorWhileGeneratingTransactions">خطأ اثناء انشاء الحركات</string>
+    <string name="exportedToExcelSuccessfully">تم التصدير الى اكسل بنجاح</string>
+    <string name="errorWhileExportingToExcel">خطأ اثناء التصدير الى اكسل</string>
+    <string name="theFileWillBeSavedIn">سيتم حفظ الملف في :</string>
+    <string name="dear">عزيزي</string>
+    <string name="thisReportWasGeneratedByDebitsManagerApp">تم انشاء هذا التقرير بواسطة DebitsManagerPro</string>
+    <string name="thanks">شكرا.</string>
 </resources>

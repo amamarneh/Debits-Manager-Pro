@@ -9,12 +9,15 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.entriesActivities.AddEditTransactionActivity;
+import amarnehsoft.com.debits.beans.CustomTransaction;
 import amarnehsoft.com.debits.beans.Person;
 import amarnehsoft.com.debits.beans.Transaction;
 import amarnehsoft.com.debits.db.sqlite.PersonsDB;
+import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 import amarnehsoft.com.debits.fragments.dialogs.GenerateExcelDialogFragment;
 import amarnehsoft.com.debits.fragments.listFragments.TransactionListFragment;
 import amarnehsoft.com.debits.fragments.tabedFragments.TransactionsTabedFragment;
@@ -89,7 +92,14 @@ public class TransactionListActivity extends ListActivity {
     @Override
     protected void onExcelIconClicked() {
         super.onExcelIconClicked();
-        GenerateExcelDialogFragment.newInstance((ArrayList<Parcelable>) mFragment.getAdapter().getList(),getString(R.string.transactions))
+        List<CustomTransaction> list = mFragment.getAdapter().getList();
+        List<Transaction>  result = new ArrayList<>();
+        for (Transaction t : list){
+            Transaction n = TransactionsDB.getInstance(this).getBeanById(t.getCode());
+            if (n != null)
+                result.add(n);
+        }
+        GenerateExcelDialogFragment.newInstance((ArrayList<Transaction>) result,getString(R.string.transactions))
                 .show(getSupportFragmentManager(),GenerateExcelDialogFragment.TAG);
     }
 }

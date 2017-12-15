@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -78,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     private List<DashboardItem> getItems(){
-        DashboardItem personsItem = new DashboardItem(TAG_PERSONS,getResources().getDrawable(R.drawable.ic_person_black_48dp),getString(R.string.thePersons));
-        DashboardItem personsCatItem = new DashboardItem(TAG_PERSONS_CAT,getResources().getDrawable(R.drawable.ic_credit_card_black_36dp),getString(R.string.personsCat));
-        DashboardItem debitsItem = new DashboardItem(TAG_DEBTS,getResources().getDrawable(R.drawable.debits),getString(R.string.theDebits));
-        DashboardItem paymentsItem = new DashboardItem(TAG_PAYMENTS,getResources().getDrawable(R.drawable.payments),getString(R.string.thePayments));
-        DashboardItem balancesItem = new DashboardItem(TAG_BALANCES,getResources().getDrawable(R.drawable.bal),getString(R.string.theBalances));
-        DashboardItem datesItem = new DashboardItem(TAG_RECIEPTS_DATE,getResources().getDrawable(R.drawable.ic_alarm_black_36dp),getString(R.string.recieptsDates));
-        DashboardItem curItem = new DashboardItem(TAG_CUR,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.theCurs));
-        DashboardItem banksItem = new DashboardItem(TAG_BANKS,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.theBanks));
+        DashboardItem personsItem = new DashboardItem(TAG_PERSONS,getResources().getDrawable(R.drawable.ic_person_black_48dp),getString(R.string.thePersons),true);
+        DashboardItem personsCatItem = new DashboardItem(TAG_PERSONS_CAT,getResources().getDrawable(R.drawable.ic_credit_card_black_36dp),getString(R.string.personsCat),true);
+        DashboardItem debitsItem = new DashboardItem(TAG_DEBTS,getResources().getDrawable(R.drawable.debits),getString(R.string.theDebits),false);
+        DashboardItem paymentsItem = new DashboardItem(TAG_PAYMENTS,getResources().getDrawable(R.drawable.payments),getString(R.string.thePayments),false);
+        DashboardItem balancesItem = new DashboardItem(TAG_BALANCES,getResources().getDrawable(R.drawable.bal),getString(R.string.theBalances),false);
+        DashboardItem datesItem = new DashboardItem(TAG_RECIEPTS_DATE,getResources().getDrawable(R.drawable.ic_alarm_black_36dp),getString(R.string.recieptsDates),true);
+        DashboardItem curItem = new DashboardItem(TAG_CUR,getResources().getDrawable(R.drawable.ic_monetization_on_black_48dp),getString(R.string.theCurs),true);
+        DashboardItem banksItem = new DashboardItem(TAG_BANKS,getResources().getDrawable(R.drawable.ic_account_balance_black_48dp),getString(R.string.theBanks),true);
 
 
         int personsCount = PersonsDB.getInstance(this).getNoOfBeans();
@@ -187,6 +188,9 @@ public class MainActivity extends AppCompatActivity {
             mImageView.setImageDrawable(item.getDrawable());
             mSummeryTextView.setText(item.getSummery());
             lineView.setBackgroundColor(item.getLineColor());
+
+            if (item.isTint())
+                mImageView.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.green_dark), android.graphics.PorterDuff.Mode.SRC_IN);
         }
 
         @Override
@@ -302,6 +306,7 @@ public class MainActivity extends AppCompatActivity {
         private String title;
         private String tag;
         private String summery;
+        private boolean tint;
 
         public int getLineColor() {
             return lineColor;
@@ -321,12 +326,21 @@ public class MainActivity extends AppCompatActivity {
             this.summery = summery;
         }
 
-        public DashboardItem(String tag, Drawable drawable, String title) {
+        public DashboardItem(String tag, Drawable drawable, String title,boolean tint) {
             this.tag = tag;
             mDrawable = drawable;
             this.title = title;
             summery = "";
             lineColor = Color.TRANSPARENT;
+            this.tint = tint;
+        }
+
+        public boolean isTint() {
+            return tint;
+        }
+
+        public void setTint(boolean tint) {
+            this.tint = tint;
         }
 
         public String getTag(){

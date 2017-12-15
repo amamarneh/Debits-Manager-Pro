@@ -1,6 +1,7 @@
 package amarnehsoft.com.debits.excell;
 
 import android.content.Context;
+import android.util.Log;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.beans.Bank;
@@ -52,13 +53,18 @@ public class TransactionsExcel extends ExcelHelper<Transaction,TransactionsExcel
             sheet.addCell(new Label(0,position, DateUtils.formatDate(bean.getTransDate())));
             Person person = PersonsDB.getInstance(mContext).getBeanById(bean.getPersonCode());
             if (person != null){
+                Log.e("Amarneh","person != null");
                 sheet.addCell(new Label(1,position,person.getName()));
             }
+            Log.e("Amarneh","person = null,personCode="+bean.getPersonCode());
             sheet.addCell(new Label(2,position,bean.getAmount()+""));
             Cur cur = CurDB.getInstance(mContext).getBeanById(bean.getCurCode());
             if (cur != null){
+                Log.e("Amarneh","cur != null");
                 sheet.addCell(new Label(3,position,cur.getName()));
             }
+            Log.e("Amarneh","cur = null,curCode="+bean.getCurCode());
+
             sheet.addCell(new Label(4,position,bean.getCurEqu()+""));
             PaymentMethod method = PaymentMethod.get(bean.getPaymentMethod());
             if (method != null){

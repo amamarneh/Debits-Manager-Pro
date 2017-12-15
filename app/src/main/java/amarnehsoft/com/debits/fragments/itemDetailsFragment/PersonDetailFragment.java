@@ -1,11 +1,16 @@
 package amarnehsoft.com.debits.fragments.itemDetailsFragment;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import amarnehsoft.com.debits.R;
 import amarnehsoft.com.debits.activities.itemDetailActivities.ItemDetailActivity;
@@ -18,11 +23,12 @@ import amarnehsoft.com.debits.db.sqlite.PersonsDB;
 import amarnehsoft.com.debits.db.sqlite.TransactionsDB;
 import amarnehsoft.com.debits.utils.MyColors;
 import amarnehsoft.com.debits.utils.NumberUtils;
+import amarnehsoft.com.debits.utils.WhatsAppUtils;
 
 public class PersonDetailFragment extends ItemDetailFragment<Person> {
 
     private TextView mAddressTxtView,mPhoneTextView,mEmailTextView,mBalanceMeTextView , mBalanceOnMeTextView,mTxtBalance;
-    private View btnShowAll,btnShowMe,btnShowOnMe,phoneImg;
+    private View btnShowAll,btnShowMe,btnShowOnMe,phoneImg,balanceLayout;
     View mPhonelayout,mMaillayout,mAddresslayout,mPhoneView,mMailView;
     public static ItemDetailFragment newInstance(String personCode){
         ItemDetailFragment fragment = new PersonDetailFragment();
@@ -50,7 +56,7 @@ public class PersonDetailFragment extends ItemDetailFragment<Person> {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_persen_details, container, false);
         mPhonelayout = rootView.findViewById(R.id.phone_layout);
@@ -58,7 +64,6 @@ public class PersonDetailFragment extends ItemDetailFragment<Person> {
         mAddresslayout = rootView.findViewById(R.id.address_layout);
         mPhoneView = rootView.findViewById(R.id.phone_layout_view);
         mMailView = rootView.findViewById(R.id.mail_layout_view);
-
         mPhoneTextView = (TextView) rootView.findViewById(R.id.phone_text_view);
         mEmailTextView = (TextView) rootView.findViewById(R.id.email_text_view);
         mBalanceMeTextView = (TextView) rootView.findViewById(R.id.txtMe);
@@ -69,6 +74,7 @@ public class PersonDetailFragment extends ItemDetailFragment<Person> {
         btnShowOnMe = rootView.findViewById(R.id.paymentsBtn);
         btnShowAll = rootView.findViewById(R.id.txtShowAll);
         phoneImg = rootView.findViewById(R.id.phoneImg);
+        balanceLayout = rootView.findViewById(R.id.balanceLayout);
 
         mBalanceMeTextView.setTextColor(MyColors.debitColor);
         mBalanceOnMeTextView.setTextColor(MyColors.paymentColor);
@@ -97,6 +103,25 @@ public class PersonDetailFragment extends ItemDetailFragment<Person> {
 
             refreshView();
         }
+
+        balanceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, WhatsAppUtils.generateContent(getContext(),mItem));
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
+
+        rootView.findViewById(R.id.btnWhatsapp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = WhatsAppUtils.send(mItem.getPhone(),WhatsAppUtils.generateContent(getContext(),mItem));
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }

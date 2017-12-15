@@ -206,6 +206,7 @@ public class CalculatorActivity extends AppCompatActivity {
         btnEqual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CalculatorController.getInstance().setQuery(CalculatorController.getInstance().calculate()+"");
                 refresh();
             }
         });
@@ -215,7 +216,8 @@ public class CalculatorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 CalculatorController.getInstance().clear();
                 Intent intent = new Intent();
-                intent.putExtra(ARG_RESULT, NumberUtils.getDouble(txtResult.getText().toString()));
+                double result = NumberUtils.getDouble(txtResult.getText().toString());
+                intent.putExtra(ARG_RESULT, NumberUtils.Round(result));
                 setResult(RESULT_OK,intent);
                 finish();
             }
