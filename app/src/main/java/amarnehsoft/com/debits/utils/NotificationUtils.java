@@ -22,7 +22,7 @@ import amarnehsoft.com.debits.broadcastReceiver.NotificationPublisher;
 public class NotificationUtils {
     public static void scheduleNotification(Context context, Notification notification, long delay,int id) {
         Intent intent = NotificationPublisher.newIntent(context,notification,id);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent , PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent , PendingIntent.FLAG_UPDATE_CURRENT);
 
         long futureInMillis = SystemClock.elapsedRealtime() + delay;
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);

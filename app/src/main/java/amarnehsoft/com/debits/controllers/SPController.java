@@ -2,6 +2,7 @@ package amarnehsoft.com.debits.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import amarnehsoft.com.debits.beans.Cur;
 import amarnehsoft.com.debits.db.sqlite.CurDB;
@@ -24,7 +25,7 @@ public class SPController {
 
     private Context mContext;
     private SharedPreferences sharedPreferences;
-
+    private SharedPreferences mSharedPreferencesDefault;
     public static SPController newInstance(Context context){
         return new SPController(context);
     }
@@ -32,18 +33,19 @@ public class SPController {
     private SPController(Context mContext) {
         this.mContext = mContext;
         sharedPreferences = mContext.getSharedPreferences(SP_NAME,Context.MODE_PRIVATE);
+        mSharedPreferencesDefault = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     public void setExportDate(String date){
-        sharedPreferences.edit().putString(ARG_EXPORT_KEY,date).apply();
+        mSharedPreferencesDefault.edit().putString(ARG_EXPORT_KEY,date).apply();
     }
 
     public void setEmail(String email){
-        sharedPreferences.edit().putString(ARG_EMAIL_KEY,email).apply();
+        mSharedPreferencesDefault.edit().putString(ARG_EMAIL_KEY,email).apply();
     }
 
     public void setImportDate(String date){
-        sharedPreferences.edit().putString(ARG_IMPORT_KEY,date).apply();
+        mSharedPreferencesDefault.edit().putString(ARG_IMPORT_KEY,date).apply();
     }
 
     public void setLogged(Boolean logged){
@@ -54,10 +56,10 @@ public class SPController {
     }
 
     public String getExportDate(){
-        return sharedPreferences.getString(ARG_EXPORT_KEY,null);
+        return mSharedPreferencesDefault.getString(ARG_EXPORT_KEY,null);
     }
     public String getImportDate(){
-        return sharedPreferences.getString(ARG_IMPORT_KEY,null);
+        return mSharedPreferencesDefault.getString(ARG_IMPORT_KEY,null);
     }
     public Boolean getLogged(){
         return sharedPreferences.getBoolean(ARG_LOGGED,false);

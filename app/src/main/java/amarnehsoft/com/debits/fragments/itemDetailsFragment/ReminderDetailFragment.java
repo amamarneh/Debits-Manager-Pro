@@ -18,7 +18,7 @@ import amarnehsoft.com.debits.utils.DateUtils;
 
 public class ReminderDetailFragment extends ItemDetailFragment<Reminder> {
 
-    private TextView txtPerson,txtReminderDate,txtAmount,txtCur, txtNotes;
+    private TextView txtPerson,txtReminderDate,txtAmount,txtCur, txtNotes, txtCreationDate;
 
     public static ItemDetailFragment newInstance(String reminderCode){
         ItemDetailFragment fragment = new ReminderDetailFragment();
@@ -53,6 +53,7 @@ public class ReminderDetailFragment extends ItemDetailFragment<Reminder> {
         txtCur = (TextView)rootView.findViewById(R.id.txtCur);
         txtNotes= (TextView)rootView.findViewById(R.id.txtNotes);
         txtReminderDate=  (TextView)rootView.findViewById(R.id.txtReminderDate);
+        txtCreationDate = (TextView)rootView.findViewById(R.id.txtCreationDate);
 
         if (mItem != null) {
             refreshView();
@@ -69,7 +70,7 @@ public class ReminderDetailFragment extends ItemDetailFragment<Reminder> {
         txtPerson.setText(personName);
         txtReminderDate.setText(DateUtils.formatDate(mItem.getReminerDate()));
         txtAmount.setText(mItem.getAmount()+"");
-
+        txtCreationDate.setText(DateUtils.formatDate(mItem.getCreationDate()));
         Cur cur = CurDB.getInstance(getContext()).getBeanById(mItem.getCurCode());
         String curName = getString(R.string.not_found);
         if (cur != null) curName = cur.getName();

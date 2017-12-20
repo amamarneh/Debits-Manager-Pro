@@ -29,7 +29,7 @@ public class ExcellUtils {
 
         //Saving file in external storage
 //        File sdCard = Environment.getExternalStorageDirectory();
-//        File directory = new File(sdCard.getAbsolutePath() + "/javatechig.todo");
+//        File directory = new File(sdCard.getAbsolutePath() + "/javatechig.to do");
 
         //create directory if not exist
         if(!directory.isDirectory()){

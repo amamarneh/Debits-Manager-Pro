@@ -31,12 +31,13 @@ import amarnehsoft.com.debits.db.sqlite.PersonsDB;
 import amarnehsoft.com.debits.db.sqlite.RemindersDB;
 import amarnehsoft.com.debits.fragments.dialogs.CreatePersonDialog;
 import amarnehsoft.com.debits.fragments.dialogs.DatePickerFragment;
+import amarnehsoft.com.debits.fragments.dialogs.DateTimePickerFragment;
 import amarnehsoft.com.debits.utils.DateUtils;
 import amarnehsoft.com.debits.utils.NotificationUtils;
 import amarnehsoft.com.debits.utils.NumberUtils;
 import amarnehsoft.com.debits.utils.ReminderContentBuilder;
 
-public class AddEditReminderActivity extends AddEditActivity implements DatePickerFragment.IDatePickerFragment{
+public class AddEditReminderActivity extends AddEditActivity implements DateTimePickerFragment.IDateTimePickerListener{
 
     public static final int REQ_SELECT_PERSON = 1;
     public static final int REQ_SELECT_CUR=2;
@@ -47,7 +48,7 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
     private AutoCompleteTextView txtName;
     private EditText txtAmount, txtNotes;
     private Button txtCur,txtTransDate,btnReminderDate;
-    private RadioButton meRadioBtn,onMeRadioBtn;
+
     private Button btnSave;
     private Button btnChoosePerson;
 
@@ -83,29 +84,9 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
         txtCur = (Button)findViewById(R.id.txtCur);
         txtNotes = (EditText)findViewById(R.id.txtNotes);
         txtTransDate = (Button)findViewById(R.id.txtTransDate);
-        meRadioBtn = (RadioButton)findViewById(R.id.meRadioBtn);
-        onMeRadioBtn = (RadioButton)findViewById(R.id.onMeRadioBtn);
+
         btnReminderDate = (Button)findViewById(R.id.btnReminderDate);
 
-        meRadioBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    selectedType = 0;
-                    setupTitle(selectedType);
-                }
-            }
-        });
-
-        onMeRadioBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    selectedType = 1;
-                    setupTitle(selectedType);
-                }
-            }
-        });
 
         btnChoosePerson = (Button)findViewById(R.id.btnChoosePerson);
         btnChoosePerson.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +114,9 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
         btnReminderDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment.newInstance(getReminderCalendar(),REQ_REMINDER_DATE).show(getSupportFragmentManager(),"datePicker");
+                DateTimePickerFragment.newInstance(selectedReminderDate, REQ_REMINDER_DATE, AddEditReminderActivity.this)
+                .Show(AddEditReminderActivity.this);
+              //  DatePickerFragment.newInstance(getReminderCalendar(),REQ_REMINDER_DATE).show(getSupportFragmentManager(),"datePicker");
             }
         });
 
@@ -154,11 +137,6 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
             txtCur.setText(curName);
             txtAmount.setText(mBean.getAmount()+"");
             selectedType = mBean.getType();
-            if (selectedType == 0){
-                meRadioBtn.setChecked(true);
-            }else {
-                onMeRadioBtn.setChecked(true);
-            }
         }else{
             mMode = MODE_ADD;
             selectedCur = CurDB.getInstance(this).getDefualtBean();
@@ -169,7 +147,6 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
             selectedReminderDate = new Date();
             txtTransDate.setText(getString(R.string.transactionDate) + "\n" +  formatDate(selectedTransDate));
             btnReminderDate.setText(getString(R.string.reminderDate)  + "\n" + formatDate(selectedReminderDate));
-            meRadioBtn.setChecked(true);
         }
 
 
@@ -283,7 +260,8 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
         RemindersDB.getInstance(this).saveBean(bean);
         Notification notification = NotificationUtils.getNotification(this, ReminderContentBuilder.buildTitle(this,bean),ReminderContentBuilder.buildContent(this,bean));
         long ms = DateUtils.getDiffInMilliSeconds(bean.getReminerDate(),new Date());
-        NotificationUtils.scheduleNotification(this,notification,ms,1);
+        // TODO: 12/20/2017 change 0 id to dynamic id
+        NotificationUtils.scheduleNotification(this,notification,ms,0);
 
         Intent intent = new Intent();
         intent.putExtra("data",bean);
@@ -335,17 +313,19 @@ public class AddEditReminderActivity extends AddEditActivity implements DatePick
     }
 
     @Override
-    public void onDateSet(int reqCode,int year, int month, int day) {
-        if (reqCode == REQ_TRANS_DATE){
-            selectedTransDate = DateUtils.getDate(year,month,day);
-            txtTransDate.setText(getString(R.string.transactionDate) + "\n" + formatDate(selectedTransDate));
-        }else if (reqCode == REQ_REMINDER_DATE){
-            selectedReminderDate = DateUtils.getDate(year,month,day);
-            btnReminderDate.setText(getString(R.string.reminderDate) + "\n" + formatDate(selectedReminderDate));
-        }
-    }
-    @Override
     protected void OnSaveClick() {
         saveCommand();
+    }
+
+    @Override
+    public void onDateTimeSet(Date date, int reqCode) {
+        Log.d("tag",date.toString() +"");
+        if (reqCode == REQ_TRANS_DATE){
+            selectedTransDate = date;
+            txtTransDate.setText(getString(R.string.transactionDate) + "\n" + formatDate(selectedTransDate));
+        }else if (reqCode == REQ_REMINDER_DATE){
+            selectedReminderDate = date;
+            btnReminderDate.setText(getString(R.string.reminderDate) + "\n" + formatDate(selectedReminderDate));
+        }
     }
 }

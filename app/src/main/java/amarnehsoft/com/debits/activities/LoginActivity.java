@@ -358,12 +358,10 @@ public class LoginActivity extends AppCompatActivity{
 
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
@@ -416,7 +414,6 @@ public class LoginActivity extends AppCompatActivity{
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
@@ -426,7 +423,7 @@ public class LoginActivity extends AppCompatActivity{
             }
 
 
-            // TODO: register the new account here.
+            //register the new account here.
             return true;
         }
 
